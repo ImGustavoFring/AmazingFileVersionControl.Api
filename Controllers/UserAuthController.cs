@@ -8,6 +8,7 @@ namespace AmazingFileVersionControl.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+
     public class UserAuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -23,7 +24,7 @@ namespace AmazingFileVersionControl.Api.Controllers
             try
             {
                 var token = await _authService.RegisterAsync(request.Login, request.Email, request.Password);
-                return Ok(new { Token = token });
+                return Ok(new { token });
             }
             catch (Exception ex)
             {
@@ -37,7 +38,7 @@ namespace AmazingFileVersionControl.Api.Controllers
             try
             {
                 var token = await _authService.LoginAsync(request.LoginOrEmail, request.Password);
-                return Ok(new { Token = token });
+                return Ok(new { token });
             }
             catch (Exception ex)
             {

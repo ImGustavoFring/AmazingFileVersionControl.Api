@@ -80,10 +80,16 @@ namespace AmazingFileVersionControl.Api
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = true,
                     ValidateAudience = true,
+                    ValidateLifetime = true,
                     ValidIssuer = configuration["JwtConfig:Issuer"],
                     ValidAudience = configuration["JwtConfig:Audience"],
-                    ClockSkew = TimeSpan.Zero // Optional: Eliminate default 5 mins clock skew.
                 };
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("UserPolicy", policy =>
+                    policy.RequireRole("USER", "ADMIN"));
             });
 
             services.AddControllers();

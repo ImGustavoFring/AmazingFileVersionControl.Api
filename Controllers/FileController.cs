@@ -1,5 +1,6 @@
 ﻿using AmazingFileVersionControl.Core.DTOs.FileDTOs;
 using AmazingFileVersionControl.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace AmazingFileVersionControl.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Policy = "UserPolicy")]
     public class FileController : ControllerBase
     {
         private readonly IFileService _fileService;
