@@ -1,6 +1,8 @@
 using AmazingFileVersionControl.Core.Contexts;
 using AmazingFileVersionControl.Core.Repositories;
 using AmazingFileVersionControl.Core.Infrastructure;
+using AmazingFileVersionControl.Core.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,8 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using System.Text;
-using AmazingFileVersionControl.Core.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text.Json.Serialization;
 
 namespace AmazingFileVersionControl.Api
 {
@@ -18,6 +19,17 @@ namespace AmazingFileVersionControl.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            });
+
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                
+            });
+
 
             // Configure services
             ConfigureServices(builder.Services, builder.Configuration);
@@ -41,20 +53,20 @@ namespace AmazingFileVersionControl.Api
                 new MongoClient(configuration.GetConnectionString("MongoDbConnection")));
 
             // Add repository services
-            services.AddScoped<UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFileRepository, FileRepository>(sp =>
                 new FileRepository(
                     sp.GetRequiredService<IMongoClient>(),
                     configuration["MongoDbSettings:DatabaseName"]));
 
             // Add infrastructure services
-            services.AddSingleton<JwtService>();
-            services.AddSingleton<BcCryptService>();
-            services.AddScoped<AuthService>();
+            services.AddSingleton<IJwtService, JwtService>();
+            services.AddSingleton<IBcCryptService, BcCryptService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IFileService, FileService>();
 
             // Configure JWT authentication
             var key = Encoding.ASCII.GetBytes(configuration["JwtConfig:Secret"]);
-
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

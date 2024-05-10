@@ -10,9 +10,9 @@ namespace AmazingFileVersionControl.Api.Controllers
     [Route("api/[controller]")]
     public class UserAuthController : ControllerBase
     {
-        private readonly AuthService _authService;
+        private readonly IAuthService _authService;
 
-        public UserAuthController(AuthService authService)
+        public UserAuthController(IAuthService authService)
         {
             _authService = authService;
         }
