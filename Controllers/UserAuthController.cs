@@ -1,21 +1,23 @@
 ﻿using AmazingFileVersionControl.Core.DTOs.AuthDTOs;
 using AmazingFileVersionControl.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
+using System;
+using System.Threading.Tasks;
 
 namespace AmazingFileVersionControl.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-
     public class UserAuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly ILoggingService _loggingService;
 
-        public UserAuthController(IAuthService authService)
+        public UserAuthController(IAuthService authService, ILoggingService loggingService)
         {
             _authService = authService;
+            _loggingService = loggingService;
         }
 
         [HttpPost("register")]
@@ -24,10 +26,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             try
             {
                 var token = await _authService.RegisterAsync(request.Login, request.Email, request.Password);
-                return Ok(new { token });
+                await _loggingService.LogAsync(nameof(UserAuthController), nameof(Register), "User registered successfully", additionalData: new BsonDocument { { "Login", request.Login }, { "Email", request.Email } });
+                return Ok(new { Token = token });
             }
             catch (Exception ex)
             {
+                await _loggingService.LogAsync(nameof(UserAuthController), nameof(Register), ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
                 return BadRequest(new { Error = ex.Message });
             }
         }
@@ -38,10 +42,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             try
             {
                 var token = await _authService.LoginAsync(request.LoginOrEmail, request.Password);
-                return Ok(new { token });
+                await _loggingService.LogAsync(nameof(UserAuthController), nameof(Login), "User logged in successfully", additionalData: new BsonDocument { { "LoginOrEmail", request.LoginOrEmail } });
+                return Ok(new { Token = token });
             }
             catch (Exception ex)
             {
+                await _loggingService.LogAsync(nameof(UserAuthController), nameof(Login), ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
                 return BadRequest(new { Error = ex.Message });
             }
         }

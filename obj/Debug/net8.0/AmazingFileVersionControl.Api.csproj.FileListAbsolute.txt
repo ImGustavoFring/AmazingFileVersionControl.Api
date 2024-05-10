@@ -57,3 +57,4 @@ C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\Amazin
 C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\obj\Debug\net8.0\AmazingFileVersionControl.Api.sourcelink.json
