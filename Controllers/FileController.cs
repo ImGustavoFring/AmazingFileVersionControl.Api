@@ -11,7 +11,7 @@ namespace AmazingFileVersionControl.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Policy = "UserPolicy")]
     public class FileController : ControllerBase
     {
         private readonly IFileService _fileService;
@@ -24,18 +24,21 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         private string GetUserLogin() => User.FindFirst(ClaimTypes.Name)?.Value;
+        private bool IsAdmin() => User.IsInRole("ADMIN");
 
         [HttpPost("upload")]
-        public async Task<IActionResult> UploadFile([FromForm] FileUploadDTO request)
+        public async Task<IActionResult> UploadOwnerFile([FromForm] FileUploadDTO request)
         {
             try
             {
                 var userLogin = GetUserLogin();
-                if (request.Owner != userLogin)
+                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+
+                if (!IsAdmin() && owner != userLogin)
                 {
                     await _loggingService.LogAsync(nameof(FileController),
-                        nameof(UploadFile), "Forbidden: Upload attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", request.Owner },
+                        nameof(UploadOwnerFile), "Forbidden: Upload attempt as another user",
+                        "Warning", new BsonDocument { { "Owner", owner },
                             { "UserLogin", userLogin } });
 
                     return Forbid("You can only upload files as yourself.");
@@ -44,24 +47,24 @@ namespace AmazingFileVersionControl.Api.Controllers
                 using var stream = request.File.OpenReadStream();
                 var objectId = await _fileService.UploadFileAsync(
                     request.Name,
-                    request.Owner,
+                    owner,
                     request.Project,
                     request.Type,
                     stream,
                     request.Description);
 
-                await _loggingService.LogAsync(nameof(FileController), nameof(UploadFile),
+                await _loggingService.LogAsync(nameof(FileController), nameof(UploadOwnerFile),
                     "File uploaded successfully",
-                    additionalData: new BsonDocument { 
+                    additionalData: new BsonDocument {
                         { "FileId", objectId.ToString() },
-                        { "Owner", request.Owner } });
+                        { "Owner", owner } });
 
                 return Ok(new { FileId = objectId.ToString() });
             }
             catch (Exception ex)
             {
                 await _loggingService.LogAsync(nameof(FileController),
-                    nameof(UploadFile), ex.Message, "Error",
+                    nameof(UploadOwnerFile), ex.Message, "Error",
                     new BsonDocument { { "Exception", ex.ToString() } });
 
                 return BadRequest(new { Error = ex.Message });
@@ -69,17 +72,19 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpGet("download")]
-        public async Task<IActionResult> DownloadFile([FromQuery] FileQueryDTO request)
+        public async Task<IActionResult> DownloadOwnerFile([FromQuery] FileQueryDTO request)
         {
             try
             {
                 var userLogin = GetUserLogin();
-                if (request.Owner != userLogin)
+                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+
+                if (!IsAdmin() && owner != userLogin)
                 {
                     await _loggingService.LogAsync(nameof(FileController),
-                        nameof(DownloadFile),
+                        nameof(DownloadOwnerFile),
                         "Forbidden: Download attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", request.Owner },
+                        "Warning", new BsonDocument { { "Owner", owner },
                             { "UserLogin", userLogin } });
 
                     return Forbid("You can only download your own files.");
@@ -87,38 +92,40 @@ namespace AmazingFileVersionControl.Api.Controllers
 
                 var stream = await _fileService.DownloadFileAsync(
                     request.Name,
-                    request.Owner,
+                    owner,
                     request.Project,
                     request.Version);
 
-                await _loggingService.LogAsync(nameof(FileController), 
-                    nameof(DownloadFile), "File downloaded successfully", 
+                await _loggingService.LogAsync(nameof(FileController),
+                    nameof(DownloadOwnerFile), "File downloaded successfully",
                     additionalData: new BsonDocument { { "FileName", request.Name },
-                        { "Owner", request.Owner } });
-                
+                        { "Owner", owner } });
+
                 return File(stream, "application/octet-stream", request.Name);
             }
             catch (Exception ex)
             {
                 await _loggingService.LogAsync(nameof(FileController),
-                    nameof(DownloadFile), ex.Message, "Error",
+                    nameof(DownloadOwnerFile), ex.Message, "Error",
                     new BsonDocument { { "Exception", ex.ToString() } });
 
                 return BadRequest(new { Error = ex.Message });
             }
         }
 
-        [HttpGet("file-info")]
-        public async Task<IActionResult> GetFileInfo([FromQuery] FileQueryDTO request)
+        [HttpGet("info")]
+        public async Task<IActionResult> GetOwnerFileInfo([FromQuery] FileQueryDTO request)
         {
             try
             {
                 var userLogin = GetUserLogin();
-                if (request.Owner != userLogin)
+                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+
+                if (!IsAdmin() && owner != userLogin)
                 {
                     await _loggingService.LogAsync(nameof(FileController),
-                        nameof(GetFileInfo), "Forbidden: File info access attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", request.Owner },
+                        nameof(GetOwnerFileInfo), "Forbidden: File info access attempt as another user",
+                        "Warning", new BsonDocument { { "Owner", owner },
                             { "UserLogin", userLogin } });
 
                     return Forbid("You can only view information about your own files.");
@@ -128,12 +135,12 @@ namespace AmazingFileVersionControl.Api.Controllers
                 {
                     var filesInfo = await _fileService.GetFileInfoAsync(
                         request.Name,
-                        request.Owner,
+                        owner,
                         request.Project);
 
                     await _loggingService.LogAsync(nameof(FileController),
-                        nameof(GetFileInfo), "File info retrieved successfully", 
-                        additionalData: new BsonDocument { { "FileName", request.Name }, { "Owner", request.Owner } });
+                        nameof(GetOwnerFileInfo), "File info retrieved successfully",
+                        additionalData: new BsonDocument { { "FileName", request.Name }, { "Owner", owner } });
 
                     return Ok(filesInfo.ToJson());
                 }
@@ -141,33 +148,33 @@ namespace AmazingFileVersionControl.Api.Controllers
                 {
                     var fileInfo = await _fileService.GetFileInfoByVersionAsync(
                         request.Name,
-                        request.Owner,
+                        owner,
                         request.Project,
                         request.Version);
 
                     await _loggingService.LogAsync(nameof(FileController),
-                        nameof(GetFileInfo), "File info by version retrieved successfully",
-                        additionalData: new BsonDocument { { "FileName", request.Name }, { "Owner", request.Owner }, { "Version", request.Version } });
+                        nameof(GetOwnerFileInfo), "File info by version retrieved successfully",
+                        additionalData: new BsonDocument { { "FileName", request.Name }, { "Owner", owner }, { "Version", request.Version } });
                     return Ok(fileInfo.ToJson());
                 }
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController), nameof(GetFileInfo), ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
+                await _loggingService.LogAsync(nameof(FileController), nameof(GetOwnerFileInfo), ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
                 return BadRequest(new { Error = ex.Message });
             }
         }
 
         [HttpGet("all-info")]
-        public async Task<IActionResult> GetAllFileInfo([FromQuery] string owner)
+        public async Task<IActionResult> GetOwnerAllFileInfo([FromQuery] string owner)
         {
             try
             {
                 var userLogin = GetUserLogin();
-                if (owner != userLogin)
+                if (!IsAdmin() && owner != userLogin)
                 {
                     await _loggingService.LogAsync(nameof(FileController),
-                        nameof(GetAllFileInfo),
+                        nameof(GetOwnerAllFileInfo),
                         "Forbidden: Access to all file info attempt as another user",
                         "Warning", new BsonDocument { { "Owner", owner },
                             { "UserLogin", userLogin } });
@@ -177,7 +184,7 @@ namespace AmazingFileVersionControl.Api.Controllers
 
                 var filesInfo = await _fileService.GetAllOwnerFilesInfoAsync(owner);
                 await _loggingService.LogAsync(nameof(FileController),
-                    nameof(GetAllFileInfo), 
+                    nameof(GetOwnerAllFileInfo),
                     "All file info retrieved successfully",
                     additionalData: new BsonDocument { { "Owner", owner } });
 
@@ -186,7 +193,7 @@ namespace AmazingFileVersionControl.Api.Controllers
             catch (Exception ex)
             {
                 await _loggingService.LogAsync(nameof(FileController),
-                    nameof(GetAllFileInfo), 
+                    nameof(GetOwnerAllFileInfo),
                     ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
 
                 return BadRequest(new { Error = ex.Message });
@@ -194,18 +201,19 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpPut("update-info")]
-        [Authorize(Policy = "UserPolicy")]
-        public async Task<IActionResult> UpdateInfoFile([FromBody] FileUpdateDTO request)
+        public async Task<IActionResult> UpdateOwnerInfoFile([FromBody] FileUpdateDTO request)
         {
             try
             {
                 var userLogin = GetUserLogin();
-                if (request.Owner != userLogin)
+                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+
+                if (!IsAdmin() && owner != userLogin)
                 {
-                    await _loggingService.LogAsync(nameof(FileController), 
-                        nameof(UpdateInfoFile), 
+                    await _loggingService.LogAsync(nameof(FileController),
+                        nameof(UpdateOwnerInfoFile),
                         "Forbidden: Update file info attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", request.Owner },
+                        "Warning", new BsonDocument { { "Owner", owner },
                             { "UserLogin", userLogin } });
 
                     return Forbid("You can only update your own files.");
@@ -216,7 +224,7 @@ namespace AmazingFileVersionControl.Api.Controllers
                 {
                     await _fileService.UpdateFileInfoAsync(
                         request.Name,
-                        request.Owner,
+                        owner,
                         request.Project,
                         updatedMetadata);
                 }
@@ -224,23 +232,23 @@ namespace AmazingFileVersionControl.Api.Controllers
                 {
                     await _fileService.UpdateFileInfoByVersionAsync(
                         request.Name,
-                        request.Owner,
+                        owner,
                         request.Project,
                         request.Version,
                         updatedMetadata);
                 }
 
                 await _loggingService.LogAsync(nameof(FileController),
-                    nameof(UpdateInfoFile), "File info updated successfully",
+                    nameof(UpdateOwnerInfoFile), "File info updated successfully",
                     additionalData: new BsonDocument { { "FileName", request.Name },
-                        { "Owner", request.Owner } });
+                        { "Owner", owner } });
 
                 return Ok();
             }
             catch (Exception ex)
             {
                 await _loggingService.LogAsync(nameof(FileController),
-                    nameof(UpdateInfoFile), ex.Message, "Error",
+                    nameof(UpdateOwnerInfoFile), ex.Message, "Error",
                     new BsonDocument { { "Exception", ex.ToString() } });
 
                 return BadRequest(new { Error = ex.Message });
@@ -248,32 +256,34 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpPut("update-all-info")]
-        [Authorize(Policy = "UserPolicy")]
-        public async Task<IActionResult> UpdateAllOwnerFilesInfo([FromBody] UpdateAllFilesDTO request)
+        public async Task<IActionResult> UpdateOwnerAllFilesInfo([FromBody] UpdateAllFilesDTO request)
         {
             try
             {
                 var userLogin = GetUserLogin();
-                if (request.Owner != userLogin)
+                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+
+                if (!IsAdmin() && owner != userLogin)
                 {
                     await _loggingService.LogAsync(nameof(FileController),
-                        nameof(UpdateAllOwnerFilesInfo), "Forbidden: Update all files info attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", request.Owner }, { "UserLogin", userLogin } });
+                        nameof(UpdateOwnerAllFilesInfo),
+                        "Forbidden: Update all files info attempt as another user",
+                        "Warning", new BsonDocument { { "Owner", owner }, { "UserLogin", userLogin } });
 
                     return Forbid("You can only update your own files.");
                 }
 
                 var updatedMetadata = BsonDocument.Parse(request.UpdatedMetadata);
-                await _fileService.UpdateAllOwnerFilesInfoAsync(request.Owner, updatedMetadata);
-                await _loggingService.LogAsync(nameof(FileController), nameof(UpdateAllOwnerFilesInfo),
-                    "All file info updated successfully", additionalData: new BsonDocument { { "Owner", request.Owner } });
+                await _fileService.UpdateAllOwnerFilesInfoAsync(owner, updatedMetadata);
+                await _loggingService.LogAsync(nameof(FileController), nameof(UpdateOwnerAllFilesInfo),
+                    "All file info updated successfully", additionalData: new BsonDocument { { "Owner", owner } });
 
                 return Ok();
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController), 
-                    nameof(UpdateAllOwnerFilesInfo),
+                await _loggingService.LogAsync(nameof(FileController),
+                    nameof(UpdateOwnerAllFilesInfo),
                     ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
 
                 return BadRequest(new { Error = ex.Message });
@@ -281,18 +291,19 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpDelete("delete")]
-        [Authorize(Policy = "UserPolicy")]
-        public async Task<IActionResult> DeleteFile([FromQuery] FileQueryDTO request)
+        public async Task<IActionResult> DeleteOwnerFile([FromQuery] FileQueryDTO request)
         {
             try
             {
                 var userLogin = GetUserLogin();
-                if (request.Owner != userLogin)
+                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+
+                if (!IsAdmin() && owner != userLogin)
                 {
                     await _loggingService.LogAsync(nameof(FileController),
-                        nameof(DeleteFile), "Forbidden: Delete file attempt as another user",
-                        "Warning", 
-                        new BsonDocument { { "Owner", request.Owner }, { "UserLogin", userLogin } });
+                        nameof(DeleteOwnerFile), "Forbidden: Delete file attempt as another user",
+                        "Warning",
+                        new BsonDocument { { "Owner", owner }, { "UserLogin", userLogin } });
                     return Forbid("You can only delete your own files.");
                 }
 
@@ -300,29 +311,29 @@ namespace AmazingFileVersionControl.Api.Controllers
                 {
                     await _fileService.DeleteFileAsync(
                         request.Name,
-                        request.Owner,
+                        owner,
                         request.Project);
                 }
                 else
                 {
                     await _fileService.DeleteFileByVersionAsync(
                         request.Name,
-                        request.Owner,
+                        owner,
                         request.Project,
                         request.Version);
                 }
 
                 await _loggingService.LogAsync(nameof(FileController),
-                    nameof(DeleteFile), "File deleted successfully", 
+                    nameof(DeleteOwnerFile), "File deleted successfully",
                     additionalData: new BsonDocument { { "FileName", request.Name },
-                        { "Owner", request.Owner } });
+                        { "Owner", owner } });
 
                 return Ok();
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController), 
-                    nameof(DeleteFile),
+                await _loggingService.LogAsync(nameof(FileController),
+                    nameof(DeleteOwnerFile),
                     ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
 
                 return BadRequest(new { Error = ex.Message });
@@ -330,34 +341,33 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpDelete("delete-all")]
-        [Authorize(Policy = "UserPolicy")]
-        public async Task<IActionResult> DeleteAllOwnerFiles([FromQuery] string owner)
+        public async Task<IActionResult> DeleteOwnerAllFiles([FromQuery] string owner)
         {
             try
             {
                 var userLogin = GetUserLogin();
-                if (owner != userLogin)
+                if (!IsAdmin() && owner != userLogin)
                 {
                     await _loggingService.LogAsync(nameof(FileController),
-                        nameof(DeleteAllOwnerFiles), 
-                        "Forbidden: Delete all files attempt as another user", 
+                        nameof(DeleteOwnerAllFiles),
+                        "Forbidden: Delete all files attempt as another user",
                         "Warning", new BsonDocument { { "Owner", owner }, { "UserLogin", userLogin } });
 
                     return Forbid("You can only delete your own files.");
                 }
 
                 await _fileService.DeleteAllOwnerFilesAsync(owner);
-                await _loggingService.LogAsync(nameof(FileController), 
-                    nameof(DeleteAllOwnerFiles), "All files deleted successfully", 
+                await _loggingService.LogAsync(nameof(FileController),
+                    nameof(DeleteOwnerAllFiles), "All files deleted successfully",
                     additionalData: new BsonDocument { { "Owner", owner } });
 
                 return Ok();
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController), 
-                    nameof(DeleteAllOwnerFiles), 
-                    ex.Message, "Error", 
+                await _loggingService.LogAsync(nameof(FileController),
+                    nameof(DeleteOwnerAllFiles),
+                    ex.Message, "Error",
                     new BsonDocument { { "Exception", ex.ToString() } });
 
                 return BadRequest(new { Error = ex.Message });
