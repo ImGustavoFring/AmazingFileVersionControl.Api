@@ -1,376 +1,249 @@
-﻿using AmazingFileVersionControl.Core.DTOs.FileDTOs;
-using AmazingFileVersionControl.Core.Services;
-using Microsoft.AspNetCore.Authorization;
+﻿using AmazingFileVersionControl.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System;
-using System.Security.Claims;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace AmazingFileVersionControl.Api.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Policy = "UserPolicy")]
+    [ApiController]
     public class FileController : ControllerBase
     {
         private readonly IFileService _fileService;
-        private readonly ILoggingService _loggingService;
 
-        public FileController(IFileService fileService, ILoggingService loggingService)
+        public FileController(IFileService fileService)
         {
             _fileService = fileService;
-            _loggingService = loggingService;
         }
 
-        private string GetUserLogin() => User.FindFirst(ClaimTypes.Name)?.Value;
-        private bool IsAdmin() => User.IsInRole("ADMIN");
-
         [HttpPost("upload")]
-        public async Task<IActionResult> UploadOwnerFile([FromForm] FileUploadDTO request)
+        public async Task<IActionResult> UploadFile(string name, string owner, string type, string project, IFormFile file, string? description = null, long? version = null)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
-
-                if (!IsAdmin() && owner != userLogin)
+                using (var stream = new MemoryStream())
                 {
-                    await _loggingService.LogAsync(nameof(FileController),
-                        nameof(UploadOwnerFile), "Forbidden: Upload attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", owner },
-                            { "UserLogin", userLogin } });
-
-                    return Forbid("You can only upload files as yourself.");
+                    await file.CopyToAsync(stream);
+                    var fileId = await _fileService.UploadFileAsync(name, owner, type, project, stream, description, version);
+                    return Ok(fileId);
                 }
-
-                using var stream = request.File.OpenReadStream();
-                var objectId = await _fileService.UploadFileAsync(
-                    request.Name,
-                    owner,
-                    request.Project,
-                    request.Type,
-                    stream,
-                    request.Description);
-
-                await _loggingService.LogAsync(nameof(FileController), nameof(UploadOwnerFile),
-                    "File uploaded successfully",
-                    additionalData: new BsonDocument {
-                        { "FileId", objectId.ToString() },
-                        { "Owner", owner } });
-
-                return Ok(new { FileId = objectId.ToString() });
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(UploadOwnerFile), ex.Message, "Error",
-                    new BsonDocument { { "Exception", ex.ToString() } });
-
-                return BadRequest(new { Error = ex.Message });
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpGet("download")]
-        public async Task<IActionResult> DownloadOwnerFile([FromQuery] FileQueryDTO request)
+        public async Task<IActionResult> DownloadFile(string name, string owner, string type, string project, long? version = null)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var (stream, metadata) = await _fileService.DownloadFileWithMetadataAsync(name, owner, type, project, version);
 
-                if (!IsAdmin() && owner != userLogin)
+                var content = new MultipartContent();
+
+                var fileContent = new StreamContent(stream);
+                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                 {
-                    await _loggingService.LogAsync(nameof(FileController),
-                        nameof(DownloadOwnerFile),
-                        "Forbidden: Download attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", owner },
-                            { "UserLogin", userLogin } });
+                    FileName = name
+                };
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
-                    return Forbid("You can only download your own files.");
-                }
+                var metadataContent = new StringContent(metadata.ToJson());
+                metadataContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+                {
+                    Name = "metadata"
+                };
+                metadataContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                var stream = await _fileService.DownloadFileAsync(
-                    request.Name,
-                    owner,
-                    request.Project,
-                    request.Version);
+                content.Add(fileContent);
+                content.Add(metadataContent);
 
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(DownloadOwnerFile), "File downloaded successfully",
-                    additionalData: new BsonDocument { { "FileName", request.Name },
-                        { "Owner", owner } });
-
-                return File(stream, "application/octet-stream", request.Name);
+                return new FileStreamResult(await content.ReadAsStreamAsync(), "multipart/form-data")
+                {
+                    FileDownloadName = name
+                };
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(DownloadOwnerFile), ex.Message, "Error",
-                    new BsonDocument { { "Exception", ex.ToString() } });
+                return BadRequest(ex.Message);
+            }
+        }
 
-                return BadRequest(new { Error = ex.Message });
+        [HttpGet("info/version")]
+        public async Task<IActionResult> GetFileInfoByVersion(string name, string owner, string type, string project, long version)
+        {
+            try
+            {
+                var fileInfo = await _fileService.GetFileInfoByVersionAsync(name, owner, type, project, version);
+                return Ok(fileInfo);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpGet("info")]
-        public async Task<IActionResult> GetOwnerFileInfo([FromQuery] FileQueryDTO request)
+        public async Task<IActionResult> GetFileInfo(string name, string owner, string type, string project)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
-
-                if (!IsAdmin() && owner != userLogin)
-                {
-                    await _loggingService.LogAsync(nameof(FileController),
-                        nameof(GetOwnerFileInfo), "Forbidden: File info access attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", owner },
-                            { "UserLogin", userLogin } });
-
-                    return Forbid("You can only view information about your own files.");
-                }
-
-                if (request.Version < 0)
-                {
-                    var filesInfo = await _fileService.GetFileInfoAsync(
-                        request.Name,
-                        owner,
-                        request.Project);
-
-                    await _loggingService.LogAsync(nameof(FileController),
-                        nameof(GetOwnerFileInfo), "File info retrieved successfully",
-                        additionalData: new BsonDocument { { "FileName", request.Name }, { "Owner", owner } });
-
-                    return Ok(filesInfo.ToJson());
-                }
-                else
-                {
-                    var fileInfo = await _fileService.GetFileInfoByVersionAsync(
-                        request.Name,
-                        owner,
-                        request.Project,
-                        request.Version);
-
-                    await _loggingService.LogAsync(nameof(FileController),
-                        nameof(GetOwnerFileInfo), "File info by version retrieved successfully",
-                        additionalData: new BsonDocument { { "FileName", request.Name }, { "Owner", owner }, { "Version", request.Version } });
-                    return Ok(fileInfo.ToJson());
-                }
+                var filesInfo = await _fileService.GetFileInfoAsync(name, owner, type, project);
+                return Ok(filesInfo);
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController), nameof(GetOwnerFileInfo), ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
-                return BadRequest(new { Error = ex.Message });
+                return BadRequest(ex.Message);
             }
         }
 
-        [HttpGet("all-info")]
-        public async Task<IActionResult> GetOwnerAllFileInfo([FromQuery] string owner)
+        [HttpGet("project/info")]
+        public async Task<IActionResult> GetProjectFilesInfo(string owner, string project)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                if (!IsAdmin() && owner != userLogin)
-                {
-                    await _loggingService.LogAsync(nameof(FileController),
-                        nameof(GetOwnerAllFileInfo),
-                        "Forbidden: Access to all file info attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", owner },
-                            { "UserLogin", userLogin } });
-
-                    return Forbid("You can only view your own files.");
-                }
-
-                var filesInfo = await _fileService.GetAllOwnerFilesInfoAsync(owner);
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(GetOwnerAllFileInfo),
-                    "All file info retrieved successfully",
-                    additionalData: new BsonDocument { { "Owner", owner } });
-
-                return Ok(filesInfo.ToJson());
+                var projectFilesInfo = await _fileService.GetProjectFilesInfoAsync(owner, project);
+                return Ok(projectFilesInfo);
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(GetOwnerAllFileInfo),
-                    ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
-
-                return BadRequest(new { Error = ex.Message });
+                return BadRequest(ex.Message);
             }
         }
 
-        [HttpPut("update-info")]
-        public async Task<IActionResult> UpdateOwnerInfoFile([FromBody] FileUpdateDTO request)
+        [HttpGet("all/info")]
+        public async Task<IActionResult> GetAllFilesInfo(string owner)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var allFilesInfo = await _fileService.GetAllFilesInfoAsync(owner);
+                return Ok(allFilesInfo);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
-                if (!IsAdmin() && owner != userLogin)
-                {
-                    await _loggingService.LogAsync(nameof(FileController),
-                        nameof(UpdateOwnerInfoFile),
-                        "Forbidden: Update file info attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", owner },
-                            { "UserLogin", userLogin } });
-
-                    return Forbid("You can only update your own files.");
-                }
-
-                var updatedMetadata = BsonDocument.Parse(request.UpdatedMetadata);
-                if (request.Version < 0)
-                {
-                    await _fileService.UpdateFileInfoAsync(
-                        request.Name,
-                        owner,
-                        request.Project,
-                        updatedMetadata);
-                }
-                else
-                {
-                    await _fileService.UpdateFileInfoByVersionAsync(
-                        request.Name,
-                        owner,
-                        request.Project,
-                        request.Version,
-                        updatedMetadata);
-                }
-
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(UpdateOwnerInfoFile), "File info updated successfully",
-                    additionalData: new BsonDocument { { "FileName", request.Name },
-                        { "Owner", owner } });
-
+        [HttpPut("update/version")]
+        public async Task<IActionResult> UpdateFileInfoByVersion(string name, string owner, string type, string project, long version, [FromBody] string updatedMetadataJson)
+        {
+            try
+            {
+                var updatedMetadata = BsonDocument.Parse(updatedMetadataJson);
+                await _fileService.UpdateFileInfoByVersionAsync(name, owner, type, project, version, updatedMetadata);
                 return Ok();
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(UpdateOwnerInfoFile), ex.Message, "Error",
-                    new BsonDocument { { "Exception", ex.ToString() } });
-
-                return BadRequest(new { Error = ex.Message });
+                return BadRequest(ex.Message);
             }
         }
 
-        [HttpPut("update-all-info")]
-        public async Task<IActionResult> UpdateOwnerAllFilesInfo([FromBody] UpdateAllFilesDTO request)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateFileInfo(string name, string owner, string type, string project, [FromBody] string updatedMetadataJson)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
-
-                if (!IsAdmin() && owner != userLogin)
-                {
-                    await _loggingService.LogAsync(nameof(FileController),
-                        nameof(UpdateOwnerAllFilesInfo),
-                        "Forbidden: Update all files info attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", owner }, { "UserLogin", userLogin } });
-
-                    return Forbid("You can only update your own files.");
-                }
-
-                var updatedMetadata = BsonDocument.Parse(request.UpdatedMetadata);
-                await _fileService.UpdateAllOwnerFilesInfoAsync(owner, updatedMetadata);
-                await _loggingService.LogAsync(nameof(FileController), nameof(UpdateOwnerAllFilesInfo),
-                    "All file info updated successfully", additionalData: new BsonDocument { { "Owner", owner } });
-
+                var updatedMetadata = BsonDocument.Parse(updatedMetadataJson);
+                await _fileService.UpdateFileInfoAsync(name, owner, type, project, updatedMetadata);
                 return Ok();
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(UpdateOwnerAllFilesInfo),
-                    ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
+                return BadRequest(ex.Message);
+            }
+        }
 
-                return BadRequest(new { Error = ex.Message });
+        [HttpPut("update/project")]
+        public async Task<IActionResult> UpdateFileInfoByProject(string owner, string project, [FromBody] string updatedMetadataJson)
+        {
+            try
+            {
+                var updatedMetadata = BsonDocument.Parse(updatedMetadataJson);
+                await _fileService.UpdateFileInfoByProjectAsync(owner, project, updatedMetadata);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("update/all")]
+        public async Task<IActionResult> UpdateAllFilesInfo(string owner, [FromBody] string updatedMetadataJson)
+        {
+            try
+            {
+                var updatedMetadata = BsonDocument.Parse(updatedMetadataJson);
+                await _fileService.UpdateAllFilesInfoAsync(owner, updatedMetadata);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("delete/version")]
+        public async Task<IActionResult> DeleteFileByVersion(string name, string owner, string type, string project, long version)
+        {
+            try
+            {
+                await _fileService.DeleteFileByVersionAsync(name, owner, type, project, version);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteOwnerFile([FromQuery] FileQueryDTO request)
+        public async Task<IActionResult> DeleteFile(string name, string owner, string type, string project)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
-
-                if (!IsAdmin() && owner != userLogin)
-                {
-                    await _loggingService.LogAsync(nameof(FileController),
-                        nameof(DeleteOwnerFile), "Forbidden: Delete file attempt as another user",
-                        "Warning",
-                        new BsonDocument { { "Owner", owner }, { "UserLogin", userLogin } });
-                    return Forbid("You can only delete your own files.");
-                }
-
-                if (request.Version < 0)
-                {
-                    await _fileService.DeleteFileAsync(
-                        request.Name,
-                        owner,
-                        request.Project);
-                }
-                else
-                {
-                    await _fileService.DeleteFileByVersionAsync(
-                        request.Name,
-                        owner,
-                        request.Project,
-                        request.Version);
-                }
-
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(DeleteOwnerFile), "File deleted successfully",
-                    additionalData: new BsonDocument { { "FileName", request.Name },
-                        { "Owner", owner } });
-
+                await _fileService.DeleteFileAsync(name, owner, type, project);
                 return Ok();
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(DeleteOwnerFile),
-                    ex.Message, "Error", new BsonDocument { { "Exception", ex.ToString() } });
-
-                return BadRequest(new { Error = ex.Message });
+                return BadRequest(ex.Message);
             }
         }
 
-        [HttpDelete("delete-all")]
-        public async Task<IActionResult> DeleteOwnerAllFiles([FromQuery] string owner)
+        [HttpDelete("delete/project")]
+        public async Task<IActionResult> DeleteProjectFiles(string owner, string project)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                if (!IsAdmin() && owner != userLogin)
-                {
-                    await _loggingService.LogAsync(nameof(FileController),
-                        nameof(DeleteOwnerAllFiles),
-                        "Forbidden: Delete all files attempt as another user",
-                        "Warning", new BsonDocument { { "Owner", owner }, { "UserLogin", userLogin } });
-
-                    return Forbid("You can only delete your own files.");
-                }
-
-                await _fileService.DeleteAllOwnerFilesAsync(owner);
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(DeleteOwnerAllFiles), "All files deleted successfully",
-                    additionalData: new BsonDocument { { "Owner", owner } });
-
+                await _fileService.DeleteProjectFilesAsync(owner, project);
                 return Ok();
             }
             catch (Exception ex)
             {
-                await _loggingService.LogAsync(nameof(FileController),
-                    nameof(DeleteOwnerAllFiles),
-                    ex.Message, "Error",
-                    new BsonDocument { { "Exception", ex.ToString() } });
+                return BadRequest(ex.Message);
+            }
+        }
 
-                return BadRequest(new { Error = ex.Message });
+        [HttpDelete("delete/all")]
+        public async Task<IActionResult> DeleteAllFiles(string owner)
+        {
+            try
+            {
+                await _fileService.DeleteAllFilesAsync(owner);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

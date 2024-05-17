@@ -59,17 +59,14 @@ namespace AmazingFileVersionControl.Api
                     sp.GetRequiredService<IMongoClient>(),
                     configuration["MongoDbSettings:FileStorage"]));
 
-            services.AddScoped<ILoggingRepository, LoggingRepository>(sp =>
-               new LoggingRepository(
-                   sp.GetRequiredService<IMongoClient>(),
-                   configuration["MongoDbSettings:LogStorage"]));
 
             // Add infrastructure services
             services.AddSingleton<IJwtGenerator, JwtGenerator>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
+
+            // Add service implementations
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IFileService, FileService>();
-            services.AddScoped<ILoggingService, LoggingService>();
             services.AddScoped<IUserService, UserService>();
 
             // Configure JWT authentication
