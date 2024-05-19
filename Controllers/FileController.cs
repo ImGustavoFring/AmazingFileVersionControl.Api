@@ -7,6 +7,16 @@ using System;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AmazingFileVersionControl.Core.DTOs.FileDTOs;
+using AmazingFileVersionControl.Core.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using System;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace AmazingFileVersionControl.Api.Controllers
 {
@@ -25,15 +35,25 @@ namespace AmazingFileVersionControl.Api.Controllers
         private string GetUserLogin() => User.FindFirst(ClaimTypes.Name)?.Value;
         private bool IsAdmin() => User.IsInRole("ADMIN");
 
+        private string GetOwner(string requestedOwner)
+        {
+            var userLogin = GetUserLogin();
+            return string.IsNullOrEmpty(requestedOwner) ? userLogin : requestedOwner;
+        }
+
+        private bool IsAuthorized(string owner)
+        {
+            return IsAdmin() || owner == GetUserLogin();
+        }
+
         [HttpPost("upload")]
         public async Task<IActionResult> UploadFile([FromForm] FileUploadDTO request)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var owner = GetOwner(request.Owner);
 
-                if (!IsAdmin() && owner != userLogin)
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only upload files as yourself.");
                 }
@@ -57,48 +77,32 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpGet("download")]
-        public async Task<IActionResult> DownloadFile([FromQuery] FileQueryDTO request)
+        public async Task<IActionResult> DownloadFileWithMetadata([FromQuery] FileQueryDTO request)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var owner = GetOwner(request.Owner);
 
-                if (!IsAdmin() && owner != userLogin)
+                if (!IsAuthorized(owner))
                 {
-                    return Forbid("You can only download your own files.");
+                    return Forbid("You can only download files you own.");
                 }
 
-                var (stream, metadata) = await _fileService.DownloadFileWithMetadataAsync(
+                var (stream, fileInfo) = await _fileService.DownloadFileWithMetadataAsync(
                     request.Name,
                     owner,
                     request.Type,
                     request.Project,
-                    request.Version);
+                    request.Version.GetValueOrDefault(-1));
 
-                var content = new MultipartContent();
-
-                var fileContent = new StreamContent(stream);
-                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = request.Name
-                };
-                fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-
-                var metadataContent = new StringContent(metadata.ToJson());
-                metadataContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-                {
-                    Name = "metadata"
-                };
-                metadataContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-                content.Add(fileContent);
-                content.Add(metadataContent);
-
-                return new FileStreamResult(await content.ReadAsStreamAsync(), "multipart/form-data")
+                var fileStreamResult = new FileStreamResult(stream, "application/octet-stream")
                 {
                     FileDownloadName = request.Name
                 };
+
+                Response.Headers.Add("File-Metadata", fileInfo.ToJson());
+
+                return fileStreamResult;
             }
             catch (Exception ex)
             {
@@ -106,15 +110,15 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+
         [HttpGet("info/version")]
         public async Task<IActionResult> GetFileInfoByVersion([FromQuery] FileQueryDTO request)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var owner = GetOwner(request.Owner);
 
-                if (!IsAdmin() && owner != userLogin)
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only view information about your own files.");
                 }
@@ -139,10 +143,9 @@ namespace AmazingFileVersionControl.Api.Controllers
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var owner = GetOwner(request.Owner);
 
-                if (!IsAdmin() && owner != userLogin)
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only view information about your own files.");
                 }
@@ -162,12 +165,12 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpGet("project/info")]
-        public async Task<IActionResult> GetProjectFilesInfo([FromQuery] string owner, [FromQuery] string project)
+        public async Task<IActionResult> GetProjectFilesInfo([FromQuery] string project, [FromQuery] string? owner = null)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                if (!IsAdmin() && owner != userLogin)
+                owner = GetOwner(owner);
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only view information about your own project files.");
                 }
@@ -183,12 +186,12 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpGet("all/info")]
-        public async Task<IActionResult> GetAllFilesInfo([FromQuery] string owner)
+        public async Task<IActionResult> GetAllFilesInfo([FromQuery] string? owner = null)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                if (!IsAdmin() && owner != userLogin)
+                owner = GetOwner(owner);
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only view your own files.");
                 }
@@ -208,10 +211,9 @@ namespace AmazingFileVersionControl.Api.Controllers
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var owner = GetOwner(request.Owner);
 
-                if (!IsAdmin() && owner != userLogin)
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only update your own files.");
                 }
@@ -238,10 +240,9 @@ namespace AmazingFileVersionControl.Api.Controllers
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var owner = GetOwner(request.Owner);
 
-                if (!IsAdmin() && owner != userLogin)
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only update your own files.");
                 }
@@ -267,10 +268,9 @@ namespace AmazingFileVersionControl.Api.Controllers
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var owner = GetOwner(request.Owner);
 
-                if (!IsAdmin() && owner != userLogin)
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only update your own files.");
                 }
@@ -291,10 +291,9 @@ namespace AmazingFileVersionControl.Api.Controllers
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var owner = GetOwner(request.Owner);
 
-                if (!IsAdmin() && owner != userLogin)
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only update your own files.");
                 }
@@ -315,10 +314,9 @@ namespace AmazingFileVersionControl.Api.Controllers
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var owner = GetOwner(request.Owner);
 
-                if (!IsAdmin() && owner != userLogin)
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only delete your own files.");
                 }
@@ -343,10 +341,9 @@ namespace AmazingFileVersionControl.Api.Controllers
         {
             try
             {
-                var userLogin = GetUserLogin();
-                var owner = string.IsNullOrEmpty(request.Owner) ? userLogin : request.Owner;
+                var owner = GetOwner(request.Owner);
 
-                if (!IsAdmin() && owner != userLogin)
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only delete your own files.");
                 }
@@ -366,12 +363,12 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpDelete("delete/project")]
-        public async Task<IActionResult> DeleteProjectFiles([FromQuery] string owner, [FromQuery] string project)
+        public async Task<IActionResult> DeleteProjectFiles([FromQuery] string project, [FromQuery] string? owner = null)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                if (!IsAdmin() && owner != userLogin)
+                owner = GetOwner(owner);
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only delete your own project files.");
                 }
@@ -387,12 +384,12 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpDelete("delete/all")]
-        public async Task<IActionResult> DeleteAllFiles([FromQuery] string owner)
+        public async Task<IActionResult> DeleteAllFiles([FromQuery] string? owner = null)
         {
             try
             {
-                var userLogin = GetUserLogin();
-                if (!IsAdmin() && owner != userLogin)
+                owner = GetOwner(owner);
+                if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only delete your own files.");
                 }
@@ -408,42 +405,5 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
     }
 }
-namespace AmazingFileVersionControl.Core.DTOs.FileDTOs
-{
-    public class FileUploadDTO
-    {
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Project { get; set; }
-        public IFormFile File { get; set; }
-        public string? Description { get; set; }
-        public string? Owner { get; set; }
-        public long? Version { get; set; }
-    }
 
-    public class FileQueryDTO
-    {
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Project { get; set; }
-        public long? Version { get; set; }
-        public string? Owner { get; set; }
-    }
 
-    public class FileUpdateDTO
-    {
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Project { get; set; }
-        public string UpdatedMetadata { get; set; }
-        public long? Version { get; set; }
-        public string? Owner { get; set; }
-    }
-
-    public class UpdateAllFilesDTO
-    {
-        public string UpdatedMetadata { get; set; }
-        public string Project { get; set; }
-        public string? Owner { get; set; }
-    }
-}
