@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
+using System;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -27,9 +28,8 @@ namespace AmazingFileVersionControl.Api
 
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {
-                
-            });
 
+            });
 
             // Configure services
             ConfigureServices(builder.Services, builder.Configuration);
@@ -59,6 +59,11 @@ namespace AmazingFileVersionControl.Api
                     sp.GetRequiredService<IMongoClient>(),
                     configuration["MongoDbSettings:FileStorage"]));
 
+            // Add Logging repository
+            services.AddScoped<ILoggingRepository, LoggingRepository>(sp =>
+                new LoggingRepository(
+                    sp.GetRequiredService<IMongoClient>(),
+                    configuration["MongoDbSettings:LogStorage"]));
 
             // Add infrastructure services
             services.AddSingleton<IJwtGenerator, JwtGenerator>();
@@ -68,6 +73,7 @@ namespace AmazingFileVersionControl.Api
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILoggingService, LoggingService>(); // Add LoggingService
 
             // Configure JWT authentication
             var key = Encoding.ASCII.GetBytes(configuration["JwtConfig:Secret"]);

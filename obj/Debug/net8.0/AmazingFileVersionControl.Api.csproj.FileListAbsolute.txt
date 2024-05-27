@@ -59,3 +59,8 @@ C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\Amazin
 C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\obj\Debug\net8.0\AmazingFileVersionControl.Api.sourcelink.json
 C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\David\Documents\Visual Studio Projects\AmazingFileVersionControl\AmazingFileVersionControl.Api\obj\Debug\net8.0\AmazingFileVersionControl.Api.MvcApplicationPartsAssemblyInfo.cs

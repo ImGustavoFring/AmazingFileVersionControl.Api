@@ -1,5 +1,4 @@
 ﻿using AmazingFileVersionControl.Core.DTOs.LoggingDTOs;
-using AmazingFileVersionControl.Core.Models.LoggingEntities;
 using AmazingFileVersionControl.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,12 +28,24 @@ namespace AmazingFileVersionControl.Api.Controllers
                 var log = await _loggingService.GetLogByIdAsync(id);
                 if (log == null)
                 {
+                    await _loggingService.LogAsync(nameof(LogController), nameof(GetLogById),
+                        $"Log with id {id} not found", "Warning");
+
                     return NotFound();
                 }
+
+                await _loggingService.LogAsync(nameof(LogController), nameof(GetLogById),
+                    "Log retrieved successfully",
+                    additionalData: new BsonDocument { { "LogId", id } });
+
                 return Ok(log);
             }
             catch (Exception ex)
             {
+                await _loggingService.LogAsync(nameof(LogController),
+                    nameof(GetLogById), ex.Message, "Error",
+                    new BsonDocument { { "Exception", ex.ToString() } });
+
                 return BadRequest(new { Error = ex.Message });
             }
         }
@@ -59,10 +70,17 @@ namespace AmazingFileVersionControl.Api.Controllers
                     string.IsNullOrEmpty(filter.Level) ? null : filter.Level,
                     additionalDataBson);
 
+                await _loggingService.LogAsync(nameof(LogController), nameof(GetLogs),
+                    "Logs retrieved successfully");
+
                 return Ok(logs);
             }
             catch (Exception ex)
             {
+                await _loggingService.LogAsync(nameof(LogController),
+                    nameof(GetLogs), ex.Message, "Error",
+                    new BsonDocument { { "Exception", ex.ToString() } });
+
                 return BadRequest(new { Error = ex.Message });
             }
         }
@@ -73,10 +91,19 @@ namespace AmazingFileVersionControl.Api.Controllers
             try
             {
                 await _loggingService.DeleteLogByIdAsync(id);
+
+                await _loggingService.LogAsync(nameof(LogController), nameof(DeleteLogById),
+                    "Log deleted successfully",
+                    additionalData: new BsonDocument { { "LogId", id } });
+
                 return Ok();
             }
             catch (Exception ex)
             {
+                await _loggingService.LogAsync(nameof(LogController),
+                    nameof(DeleteLogById), ex.Message, "Error",
+                    new BsonDocument { { "Exception", ex.ToString() } });
+
                 return BadRequest(new { Error = ex.Message });
             }
         }
@@ -101,10 +128,17 @@ namespace AmazingFileVersionControl.Api.Controllers
                     string.IsNullOrEmpty(filter.Level) ? null : filter.Level,
                     additionalDataBson);
 
+                await _loggingService.LogAsync(nameof(LogController), nameof(DeleteLogs),
+                    "Logs deleted successfully");
+
                 return Ok();
             }
             catch (Exception ex)
             {
+                await _loggingService.LogAsync(nameof(LogController),
+                    nameof(DeleteLogs), ex.Message, "Error",
+                    new BsonDocument { { "Exception", ex.ToString() } });
+
                 return BadRequest(new { Error = ex.Message });
             }
         }
