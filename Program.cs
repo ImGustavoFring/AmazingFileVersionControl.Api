@@ -94,6 +94,9 @@ namespace AmazingFileVersionControl.Api
             {
                 options.AddPolicy("UserPolicy", policy =>
                     policy.RequireRole("USER", "ADMIN"));
+
+                options.AddPolicy("AdminPolicy", policy => policy.RequireRole("ADMIN"));
+
             });
 
             services.AddControllers();
