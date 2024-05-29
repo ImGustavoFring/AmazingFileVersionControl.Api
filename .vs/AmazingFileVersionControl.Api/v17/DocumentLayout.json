@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|c:\\users\\david\\documents\\visual studio projects\\amazingfileversioncontrol\\amazingfileversioncontrol.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\controllers\\logcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|solutionrelative:controllers\\logcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,10 +31,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{E0802EAE-6715-4805-B63C-FF979F9E5856}|..\\AmazingFileVersionControl.Core\\AmazingFileVersionControl.Core.csproj|c:\\users\\david\\documents\\visual studio projects\\amazingfileversioncontrol\\amazingfileversioncontrol.core\\services\\loggingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E0802EAE-6715-4805-B63C-FF979F9E5856}|..\\AmazingFileVersionControl.Core\\AmazingFileVersionControl.Core.csproj|c:\\users\\david\\documents\\visual studio projects\\amazingfileversioncontrol\\amazingfileversioncontrol.core\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -54,28 +66,16 @@
       "AbsoluteMoniker": "D:0:0:{E0802EAE-6715-4805-B63C-FF979F9E5856}|..\\AmazingFileVersionControl.Core\\AmazingFileVersionControl.Core.csproj|c:\\users\\david\\documents\\visual studio projects\\amazingfileversioncontrol\\amazingfileversioncontrol.core\\models\\userdbentities\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E0802EAE-6715-4805-B63C-FF979F9E5856}|..\\AmazingFileVersionControl.Core\\AmazingFileVersionControl.Core.csproj|c:\\users\\david\\documents\\visual studio projects\\amazingfileversioncontrol\\amazingfileversioncontrol.core\\services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E0802EAE-6715-4805-B63C-FF979F9E5856}|..\\AmazingFileVersionControl.Core\\AmazingFileVersionControl.Core.csproj|c:\\users\\david\\documents\\visual studio projects\\amazingfileversioncontrol\\amazingfileversioncontrol.core\\dtos\\filedtos\\filesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\controllers\\logcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|solutionrelative:controllers\\logcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E0802EAE-6715-4805-B63C-FF979F9E5856}|..\\AmazingFileVersionControl.Core\\AmazingFileVersionControl.Core.csproj|c:\\users\\david\\documents\\visual studio projects\\amazingfileversioncontrol\\amazingfileversioncontrol.core\\dtos\\loggingdtos\\logfilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E0802EAE-6715-4805-B63C-FF979F9E5856}|..\\AmazingFileVersionControl.Core\\AmazingFileVersionControl.Core.csproj|c:\\users\\david\\documents\\visual studio projects\\amazingfileversioncontrol\\amazingfileversioncontrol.core\\models\\loggingentities\\logentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|c:\\users\\david\\documents\\visual studio projects\\amazingfileversioncontrol\\amazingfileversioncontrol.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3961B6B7-7754-4D75-B2E5-CA907DF64370}|AmazingFileVersionControl.Api.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E0802EAE-6715-4805-B63C-FF979F9E5856}|..\\AmazingFileVersionControl.Core\\AmazingFileVersionControl.Core.csproj|c:\\users\\david\\documents\\visual studio projects\\amazingfileversioncontrol\\amazingfileversioncontrol.core\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -106,7 +106,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -126,85 +126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAYwLwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T03:56:10.464Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "IFileService.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\IFileService.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\IFileService.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\IFileService.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\IFileService.cs",
-              "ViewState": "AQIAAHUAAAAAAAAAAAAYwJEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T07:22:42.281Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ILoggingService.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\ILoggingService.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\ILoggingService.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\ILoggingService.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\ILoggingService.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAYwD8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T07:22:31.594Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IAuthService.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\IAuthService.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\IAuthService.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\IAuthService.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\IAuthService.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAYwB8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T07:22:19.076Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FileController.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\FileController.cs",
-              "RelativeDocumentMoniker": "Controllers\\FileController.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\FileController.cs",
-              "RelativeToolTip": "Controllers\\FileController.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAABUAAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T12:20:51.621Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\UserService.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\UserService.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\UserService.cs",
-              "ViewState": "AQIAAKQAAAAAAAAAAAAAwMkAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T03:56:01.176Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "LoggingService.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\LoggingService.cs",
               "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\LoggingService.cs",
@@ -212,25 +134,49 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\LoggingService.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAiwI4AAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T02:48:52.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-27T02:48:52.154Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\AuthController.cs",
               "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AQIAADsAAAAAAAAAAAAQwGsAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-17T12:20:05.95Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAAAQwDkAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T03:56:10.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\UserService.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\UserService.cs",
+              "ViewState": "AQIAAKQAAAAAAAAAAAAAwMkAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-29T03:56:01.176Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "IUserService.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\IUserService.cs",
               "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\IUserService.cs",
@@ -238,103 +184,24 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\IUserService.cs",
               "ViewState": "AQIAADgAAAAAAAAAAAAYwFQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T04:28:41.88Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-29T04:28:41.88Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IUserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\IUserRepository.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\IUserRepository.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\IUserRepository.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\IUserRepository.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAYwD8AAAAAAAAA",
+              "DocumentIndex": 4,
+              "Title": "LogController.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\LogController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LogController.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\LogController.cs",
+              "RelativeToolTip": "Controllers\\LogController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAALsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T07:22:52.99Z",
+              "WhenOpened": "2024-05-27T03:10:30.521Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ILoggingRepository.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\ILoggingRepository.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\ILoggingRepository.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\ILoggingRepository.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\ILoggingRepository.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAYwDEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T07:22:05.603Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "IFileRepository.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\IFileRepository.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\IFileRepository.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\IFileRepository.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\IFileRepository.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAYwEkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T07:21:57.949Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "FileRepository.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\FileRepository.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\FileRepository.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\FileRepository.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\FileRepository.cs",
-              "ViewState": "AQIAAPMAAAAAAAAAAAAYwA8BAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T10:25:40.896Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "UserEntity.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Models\\UserDbEntities\\UserEntity.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Models\\UserDbEntities\\UserEntity.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Models\\UserDbEntities\\UserEntity.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Models\\UserDbEntities\\UserEntity.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAAAswDQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T03:53:32.569Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "LoggingRepository.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\LoggingRepository.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\LoggingRepository.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\LoggingRepository.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\LoggingRepository.cs",
-              "ViewState": "AQIAAFsAAAAAAAAAAAAkwGQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T02:45:01.027Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\UserRepository.cs",
-              "ViewState": "AQIAAJoAAAAAAAAAAAAwwKsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T06:57:06.129Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -347,7 +214,152 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAANgAAABsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T03:27:00.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FileController.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\FileController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FileController.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\FileController.cs",
+              "RelativeToolTip": "Controllers\\FileController.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAABUAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T12:20:51.621Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\IAuthService.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\IAuthService.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\IAuthService.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAYwB8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-29T07:22:19.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ILoggingService.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\ILoggingService.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\ILoggingService.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\ILoggingService.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\ILoggingService.cs",
+              "ViewState": "AQIAACMAAAAAAAAAAAAYwD8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-29T07:22:31.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IFileService.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\IFileService.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\IFileService.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\IFileService.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\IFileService.cs",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAYwJEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-29T07:22:42.281Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\IUserRepository.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\IUserRepository.cs",
+              "ViewState": "AQIAACMAAAAAAAAAAAAYwD8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-29T07:22:52.99Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ILoggingRepository.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\ILoggingRepository.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\ILoggingRepository.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\ILoggingRepository.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\ILoggingRepository.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAYwDEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-29T07:22:05.603Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IFileRepository.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\IFileRepository.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\IFileRepository.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\IFileRepository.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\IFileRepository.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAYwEkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-29T07:21:57.949Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "FileRepository.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\FileRepository.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\FileRepository.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\FileRepository.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\FileRepository.cs",
+              "ViewState": "AQIAAPMAAAAAAAAAAAAYwA8BAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T10:25:40.896Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UserEntity.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Models\\UserDbEntities\\UserEntity.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Models\\UserDbEntities\\UserEntity.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Models\\UserDbEntities\\UserEntity.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Models\\UserDbEntities\\UserEntity.cs",
+              "ViewState": "AQIAACYAAAAAAAAAAAAswDQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T03:53:32.569Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "LoggingRepository.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\LoggingRepository.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\LoggingRepository.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\LoggingRepository.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\LoggingRepository.cs",
+              "ViewState": "AQIAAFsAAAAAAAAAAAAkwGQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T02:45:01.027Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 17,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Repositories\\UserRepository.cs",
+              "ViewState": "AQIAAJoAAAAAAAAAAAAwwKsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-29T06:57:06.129Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "FileService.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Services\\FileService.cs",
               "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Services\\FileService.cs",
@@ -355,12 +367,11 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\FileService.cs",
               "ViewState": "AQIAAL4BAAAAAAAAAAAqwOgBAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T12:36:28.657Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-17T12:36:28.657Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "FilesDTO.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\DTOs\\FileDTOs\\FilesDTO.cs",
               "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\DTOs\\FileDTOs\\FilesDTO.cs",
@@ -368,25 +379,11 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\DTOs\\FileDTOs\\FilesDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAGQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T12:50:13.524Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-17T12:50:13.524Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "LogController.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\LogController.cs",
-              "RelativeDocumentMoniker": "Controllers\\LogController.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\LogController.cs",
-              "RelativeToolTip": "Controllers\\LogController.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAALsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T03:10:30.521Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "LogFilterDTO.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\DTOs\\LoggingDTOs\\LogFilterDTO.cs",
               "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\DTOs\\LoggingDTOs\\LogFilterDTO.cs",
@@ -394,12 +391,11 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\DTOs\\LoggingDTOs\\LogFilterDTO.cs",
               "ViewState": "AQIAABQAAAAAAAAAAAA5wBwAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T03:14:36.733Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-27T03:14:36.733Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "LogEntity.cs",
               "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Core\\Models\\LoggingEntities\\LogEntity.cs",
               "RelativeDocumentMoniker": "..\\AmazingFileVersionControl.Core\\Models\\LoggingEntities\\LogEntity.cs",
@@ -407,21 +403,7 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Models\\LoggingEntities\\LogEntity.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAACYAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T07:00:58.624Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\David\\Documents\\Visual Studio Projects\\AmazingFileVersionControl\\AmazingFileVersionControl.Api\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAABcBAAAAAAAAAAAuwHQBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T03:27:00.319Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-29T07:00:58.624Z"
             },
             {
               "$type": "Document",
@@ -433,8 +415,7 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Services\\AuthService.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAAGcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T06:53:59.544Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-29T06:53:59.544Z"
             },
             {
               "$type": "Document",
@@ -446,8 +427,7 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Contexts\\EntityConfigurations\\UserEntityConfiguration.cs",
               "ViewState": "AQIAABAAAAAAAAAAAAAAwD8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T06:53:39.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-29T06:53:39.267Z"
             },
             {
               "$type": "Document",
@@ -459,8 +439,7 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\DTOs\\AuthDTOs\\RegisterDTO.cs",
               "ViewState": "AQIAABIAAAAAAAAAAAA3wCYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T06:53:03.854Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-29T06:53:03.854Z"
             },
             {
               "$type": "Document",
@@ -472,8 +451,7 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\DTOs\\AuthDTOs\\LoginDTO.cs",
               "ViewState": "AQIAABgAAAAAAAAAAAAgwCAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T02:35:42.112Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-29T02:35:42.112Z"
             },
             {
               "$type": "Document",
@@ -485,8 +463,7 @@
               "RelativeToolTip": "..\\AmazingFileVersionControl.Core\\Contexts\\UserDbContext.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAAAD8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T03:53:46.478Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-17T03:53:46.478Z"
             },
             {
               "$type": "Document",

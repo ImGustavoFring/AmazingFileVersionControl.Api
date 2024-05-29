@@ -1,0 +1,129 @@
+\doxysection{Класс Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Log\+Controller}
+\hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller}{}\label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller}\index{AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}}
+
+
+Класс контроллера для управления логами.  
+
+
+Граф наследования\+:Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Log\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_a87a1e3db5d8f16b97cf20ff6c717b647}{Log\+Controller}} (ILogging\+Service logging\+Service, IUser\+Service user\+Service)
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller}{Log\+Controller}. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_adf68f5a925ab0bde7f117259e026fc80}{Get\+Log\+By\+Id}} (string id)
+\begin{DoxyCompactList}\small\item\em Получить лог по идентификатору. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_aee5b965e2213d4fcb0bed9d6e6d14418}{Get\+Logs}} (\mbox{[}From\+Query\mbox{]} Log\+Filter\+DTO filter)
+\begin{DoxyCompactList}\small\item\em Получить список логов по фильтрам. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_afcbc948e4f00e00bc15ae6eb730bfab1}{Delete\+Log\+By\+Id}} (string id)
+\begin{DoxyCompactList}\small\item\em Удалить лог по идентификатору. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_a6e0e94b0d9bdf11be4d0ee95ab536d25}{Delete\+Logs}} (\mbox{[}From\+Query\mbox{]} Log\+Filter\+DTO filter)
+\begin{DoxyCompactList}\small\item\em Удалить список логов по фильтрам. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс контроллера для управления логами. 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_a87a1e3db5d8f16b97cf20ff6c717b647}\index{AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}!LogController@{LogController}}
+\index{LogController@{LogController}!AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}}
+\doxysubsubsection{\texorpdfstring{LogController()}{LogController()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_a87a1e3db5d8f16b97cf20ff6c717b647} 
+Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Log\+Controller.\+Log\+Controller (\begin{DoxyParamCaption}\item[{ILogging\+Service}]{logging\+Service}{, }\item[{IUser\+Service}]{user\+Service}{}\end{DoxyParamCaption})}
+
+
+
+Конструктор класса \doxylink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller}{Log\+Controller}. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em logging\+Service} & Сервис логирования. \\
+\hline
+{\em user\+Service} & Сервис управления пользователями. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_afcbc948e4f00e00bc15ae6eb730bfab1}\index{AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}!DeleteLogById@{DeleteLogById}}
+\index{DeleteLogById@{DeleteLogById}!AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}}
+\doxysubsubsection{\texorpdfstring{DeleteLogById()}{DeleteLogById()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_afcbc948e4f00e00bc15ae6eb730bfab1} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Log\+Controller.\+Delete\+Log\+By\+Id (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Удалить лог по идентификатору. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em id} & Идентификатор лога. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_a6e0e94b0d9bdf11be4d0ee95ab536d25}\index{AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}!DeleteLogs@{DeleteLogs}}
+\index{DeleteLogs@{DeleteLogs}!AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}}
+\doxysubsubsection{\texorpdfstring{DeleteLogs()}{DeleteLogs()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_a6e0e94b0d9bdf11be4d0ee95ab536d25} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Log\+Controller.\+Delete\+Logs (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} Log\+Filter\+DTO}]{filter}{}\end{DoxyParamCaption})}
+
+
+
+Удалить список логов по фильтрам. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em filter} & DTO с данными фильтрации логов. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_adf68f5a925ab0bde7f117259e026fc80}\index{AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}!GetLogById@{GetLogById}}
+\index{GetLogById@{GetLogById}!AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}}
+\doxysubsubsection{\texorpdfstring{GetLogById()}{GetLogById()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_adf68f5a925ab0bde7f117259e026fc80} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Log\+Controller.\+Get\+Log\+By\+Id (\begin{DoxyParamCaption}\item[{string}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Получить лог по идентификатору. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em id} & Идентификатор лога. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_aee5b965e2213d4fcb0bed9d6e6d14418}\index{AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}!GetLogs@{GetLogs}}
+\index{GetLogs@{GetLogs}!AmazingFileVersionControl.Api.Controllers.LogController@{AmazingFileVersionControl.Api.Controllers.LogController}}
+\doxysubsubsection{\texorpdfstring{GetLogs()}{GetLogs()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_log_controller_aee5b965e2213d4fcb0bed9d6e6d14418} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Log\+Controller.\+Get\+Logs (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} Log\+Filter\+DTO}]{filter}{}\end{DoxyParamCaption})}
+
+
+
+Получить список логов по фильтрам. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em filter} & DTO с данными фильтрации логов. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Controllers/\mbox{\hyperlink{_log_controller_8cs}{Log\+Controller.\+cs}}\end{DoxyCompactItemize}

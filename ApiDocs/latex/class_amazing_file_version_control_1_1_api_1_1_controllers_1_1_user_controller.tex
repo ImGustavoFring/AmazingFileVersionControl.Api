@@ -1,0 +1,217 @@
+\doxysection{Класс Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller}
+\hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller}{}\label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller}\index{AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}}
+
+
+Класс контроллера для управления пользователями.  
+
+
+Граф наследования\+:Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_ab66561c0d7c0646f0b1dce4764053ea6}{User\+Controller}} (IUser\+Service user\+Service, ILogging\+Service logging\+Service)
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller}{User\+Controller}. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a8ad84a773903e1e8f7a9799e3d6aa5cc}{Get\+User}} (\mbox{[}From\+Query\mbox{]} string? user\+Id)
+\begin{DoxyCompactList}\small\item\em Получить информацию о пользователе. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a7262961842b22ed47799abda6e97ef4d}{Get\+Users\+By\+Login\+Substring}} (\mbox{[}From\+Query\mbox{]} string login\+Substring)
+\begin{DoxyCompactList}\small\item\em Получить список пользователей по подстроке логина. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a52264049dcfd1a7aee817c31cebf6082}{Get\+Users\+By\+Email\+Substring}} (\mbox{[}From\+Query\mbox{]} string email\+Substring)
+\begin{DoxyCompactList}\small\item\em Получить список пользователей по подстроке электронной почты. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a33aec68a2f897ab7ae619cf410576864}{Change\+Login}} (\mbox{[}From\+Query\mbox{]} string? user\+Id, \mbox{[}From\+Body\mbox{]} string new\+Login)
+\begin{DoxyCompactList}\small\item\em Изменить логин пользователя. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a5edd50aa9a4971d6c4ccb8b222b41a4c}{Change\+Email}} (\mbox{[}From\+Query\mbox{]} string? user\+Id, \mbox{[}From\+Body\mbox{]} string new\+Email)
+\begin{DoxyCompactList}\small\item\em Изменить электронную почту пользователя. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a5efc1c1c028bbf0e796d683bce47e086}{Change\+Password}} (\mbox{[}From\+Query\mbox{]} string? user\+Id, \mbox{[}From\+Body\mbox{]} string new\+Password)
+\begin{DoxyCompactList}\small\item\em Изменить пароль пользователя. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_ac778ff79c21d1d6d3fbd527424348e68}{Change\+Role}} (\mbox{[}From\+Query\mbox{]} string? user\+Id, Role\+In\+System new\+Role)
+\begin{DoxyCompactList}\small\item\em Изменить роль пользователя. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a1d738109168343a6a32529f5df36e46d}{Delete\+User}} (\mbox{[}From\+Query\mbox{]} string? user\+Id)
+\begin{DoxyCompactList}\small\item\em Удалить пользователя. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс контроллера для управления пользователями. 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_ab66561c0d7c0646f0b1dce4764053ea6}\index{AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}!UserController@{UserController}}
+\index{UserController@{UserController}!AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}}
+\doxysubsubsection{\texorpdfstring{UserController()}{UserController()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_ab66561c0d7c0646f0b1dce4764053ea6} 
+Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller.\+User\+Controller (\begin{DoxyParamCaption}\item[{IUser\+Service}]{user\+Service}{, }\item[{ILogging\+Service}]{logging\+Service}{}\end{DoxyParamCaption})}
+
+
+
+Конструктор класса \doxylink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller}{User\+Controller}. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em user\+Service} & Сервис управления пользователями. \\
+\hline
+{\em logging\+Service} & Сервис логирования. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a5edd50aa9a4971d6c4ccb8b222b41a4c}\index{AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}!ChangeEmail@{ChangeEmail}}
+\index{ChangeEmail@{ChangeEmail}!AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}}
+\doxysubsubsection{\texorpdfstring{ChangeEmail()}{ChangeEmail()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a5edd50aa9a4971d6c4ccb8b222b41a4c} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller.\+Change\+Email (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string?}]{user\+Id}{, }\item[{\mbox{[}\+From\+Body\mbox{]} string}]{new\+Email}{}\end{DoxyParamCaption})}
+
+
+
+Изменить электронную почту пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em user\+Id} & Идентификатор пользователя. \\
+\hline
+{\em new\+Email} & Новая электронная почта пользователя. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a33aec68a2f897ab7ae619cf410576864}\index{AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}!ChangeLogin@{ChangeLogin}}
+\index{ChangeLogin@{ChangeLogin}!AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}}
+\doxysubsubsection{\texorpdfstring{ChangeLogin()}{ChangeLogin()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a33aec68a2f897ab7ae619cf410576864} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller.\+Change\+Login (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string?}]{user\+Id}{, }\item[{\mbox{[}\+From\+Body\mbox{]} string}]{new\+Login}{}\end{DoxyParamCaption})}
+
+
+
+Изменить логин пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em user\+Id} & Идентификатор пользователя. \\
+\hline
+{\em new\+Login} & Новый логин пользователя. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a5efc1c1c028bbf0e796d683bce47e086}\index{AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}!ChangePassword@{ChangePassword}}
+\index{ChangePassword@{ChangePassword}!AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}}
+\doxysubsubsection{\texorpdfstring{ChangePassword()}{ChangePassword()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a5efc1c1c028bbf0e796d683bce47e086} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller.\+Change\+Password (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string?}]{user\+Id}{, }\item[{\mbox{[}\+From\+Body\mbox{]} string}]{new\+Password}{}\end{DoxyParamCaption})}
+
+
+
+Изменить пароль пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em user\+Id} & Идентификатор пользователя. \\
+\hline
+{\em new\+Password} & Новый пароль пользователя. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_ac778ff79c21d1d6d3fbd527424348e68}\index{AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}!ChangeRole@{ChangeRole}}
+\index{ChangeRole@{ChangeRole}!AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}}
+\doxysubsubsection{\texorpdfstring{ChangeRole()}{ChangeRole()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_ac778ff79c21d1d6d3fbd527424348e68} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller.\+Change\+Role (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string?}]{user\+Id}{, }\item[{Role\+In\+System}]{new\+Role}{}\end{DoxyParamCaption})}
+
+
+
+Изменить роль пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em user\+Id} & Идентификатор пользователя. \\
+\hline
+{\em new\+Role} & Новая роль пользователя. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a1d738109168343a6a32529f5df36e46d}\index{AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}!DeleteUser@{DeleteUser}}
+\index{DeleteUser@{DeleteUser}!AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}}
+\doxysubsubsection{\texorpdfstring{DeleteUser()}{DeleteUser()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a1d738109168343a6a32529f5df36e46d} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller.\+Delete\+User (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string?}]{user\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Удалить пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em user\+Id} & Идентификатор пользователя. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a8ad84a773903e1e8f7a9799e3d6aa5cc}\index{AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}!GetUser@{GetUser}}
+\index{GetUser@{GetUser}!AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}}
+\doxysubsubsection{\texorpdfstring{GetUser()}{GetUser()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a8ad84a773903e1e8f7a9799e3d6aa5cc} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller.\+Get\+User (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string?}]{user\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Получить информацию о пользователе. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em user\+Id} & Идентификатор пользователя. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a52264049dcfd1a7aee817c31cebf6082}\index{AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}!GetUsersByEmailSubstring@{GetUsersByEmailSubstring}}
+\index{GetUsersByEmailSubstring@{GetUsersByEmailSubstring}!AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}}
+\doxysubsubsection{\texorpdfstring{GetUsersByEmailSubstring()}{GetUsersByEmailSubstring()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a52264049dcfd1a7aee817c31cebf6082} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller.\+Get\+Users\+By\+Email\+Substring (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string}]{email\+Substring}{}\end{DoxyParamCaption})}
+
+
+
+Получить список пользователей по подстроке электронной почты. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em email\+Substring} & Подстрока электронной почты. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a7262961842b22ed47799abda6e97ef4d}\index{AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}!GetUsersByLoginSubstring@{GetUsersByLoginSubstring}}
+\index{GetUsersByLoginSubstring@{GetUsersByLoginSubstring}!AmazingFileVersionControl.Api.Controllers.UserController@{AmazingFileVersionControl.Api.Controllers.UserController}}
+\doxysubsubsection{\texorpdfstring{GetUsersByLoginSubstring()}{GetUsersByLoginSubstring()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_user_controller_a7262961842b22ed47799abda6e97ef4d} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+User\+Controller.\+Get\+Users\+By\+Login\+Substring (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string}]{login\+Substring}{}\end{DoxyParamCaption})}
+
+
+
+Получить список пользователей по подстроке логина. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em login\+Substring} & Подстрока логина. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Controllers/\mbox{\hyperlink{_user_controller_8cs}{User\+Controller.\+cs}}\end{DoxyCompactItemize}

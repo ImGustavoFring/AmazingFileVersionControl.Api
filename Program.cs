@@ -1,6 +1,7 @@
-/**
+п»ї/**
  * @file Program.cs
- * @brief Основная точка входа для приложения.
+ * @brief РћСЃРЅРѕРІРЅР°СЏ С‚РѕС‡РєР° РІС…РѕРґР° РґР»СЏ РїСЂРёР»РѕР¶РµРЅРёСЏ.
+ * @encoding UTF-8
  */
 
 using AmazingFileVersionControl.Core.Contexts;
@@ -23,13 +24,13 @@ namespace AmazingFileVersionControl.Api
 {
     /**
      * @class Program
-     * @brief Класс, представляющий точку входа для приложения.
+     * @brief РљР»Р°СЃСЃ, РїСЂРµРґСЃС‚Р°РІР»СЏСЋС‰РёР№ С‚РѕС‡РєСѓ РІС…РѕРґР° РґР»СЏ РїСЂРёР»РѕР¶РµРЅРёСЏ.
      */
     public class Program
     {
         /**
-         * @brief Основная точка входа для приложения.
-         * @param args Аргументы командной строки.
+         * @brief РћСЃРЅРѕРІРЅР°СЏ С‚РѕС‡РєР° РІС…РѕРґР° РґР»СЏ РїСЂРёР»РѕР¶РµРЅРёСЏ.
+         * @param args РђСЂРіСѓРјРµРЅС‚С‹ РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРё.
          */
         public static void Main(string[] args)
         {
@@ -44,56 +45,47 @@ namespace AmazingFileVersionControl.Api
             {
             });
 
-            // Конфигурация сервисов
             ConfigureServices(builder.Services, builder.Configuration);
 
             var app = builder.Build();
 
-            // Конфигурация промежуточного программного обеспечения
             Configure(app);
 
             app.Run();
         }
 
         /**
-         * @brief Конфигурирование сервисов.
-         * @param services Коллекция сервисов.
-         * @param configuration Конфигурация приложения.
+         * @brief РљРѕРЅС„РёРіСѓСЂРёСЂРѕРІР°РЅРёРµ СЃРµСЂРІРёСЃРѕРІ.
+         * @param services РљРѕР»Р»РµРєС†РёСЏ СЃРµСЂРІРёСЃРѕРІ.
+         * @param configuration РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ.
          */
         private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            // Добавление контекста базы данных для PostgreSQL
             services.AddDbContext<UserDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("PostgreSqlConnection")));
 
-            // Добавление клиента MongoDB
             services.AddSingleton<IMongoClient, MongoClient>(sp =>
                 new MongoClient(configuration.GetConnectionString("MongoDbConnection")));
 
-            // Добавление сервисов репозитория
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFileRepository, FileRepository>(sp =>
                 new FileRepository(
                     sp.GetRequiredService<IMongoClient>(),
                     configuration["MongoDbSettings:FileStorage"]));
 
-            // Добавление репозитория логирования
             services.AddScoped<ILoggingRepository, LoggingRepository>(sp =>
                 new LoggingRepository(
                     sp.GetRequiredService<IMongoClient>(),
                     configuration["MongoDbSettings:LogStorage"]));
 
-            // Добавление инфраструктурных сервисов
             services.AddSingleton<IJwtGenerator, JwtGenerator>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
-            // Добавление реализаций сервисов
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ILoggingService, LoggingService>(); // Добавление LoggingService
+            services.AddScoped<ILoggingService, LoggingService>();
 
-            // Конфигурация аутентификации JWT
             var key = Encoding.ASCII.GetBytes(configuration["JwtConfig:Secret"]);
             services.AddAuthentication(options =>
             {
@@ -124,12 +116,10 @@ namespace AmazingFileVersionControl.Api
 
             services.AddControllers();
 
-            // Регистрация генератора Swagger, определение одного или нескольких документов Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AmazingFileVersionControl API", Version = "v1" });
 
-                // Добавление поддержки токена JWT в Swagger
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
@@ -157,8 +147,8 @@ namespace AmazingFileVersionControl.Api
         }
 
         /**
-         * @brief Конфигурирование приложения.
-         * @param app Веб-приложение.
+         * @brief РљРѕРЅС„РёРіСѓСЂРёСЂРѕРІР°РЅРёРµ РїСЂРёР»РѕР¶РµРЅРёСЏ.
+         * @param app Р’РµР±-РїСЂРёР»РѕР¶РµРЅРёРµ.
          */
         private static void Configure(WebApplication app)
         {
@@ -171,15 +161,12 @@ namespace AmazingFileVersionControl.Api
             app.UseAuthentication();
             app.UseAuthorization();
 
-            // Включение промежуточного ПО для обслуживания сгенерированного Swagger в виде JSON конечной точки.
             app.UseSwagger();
 
-            // Включение промежуточного ПО для обслуживания swagger-ui (HTML, JS, CSS и т.д.),
-            // указывая конечную точку Swagger JSON.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "AmazingFileVersionControl API V1");
-                c.RoutePrefix = string.Empty; // Установить Swagger UI в корне приложения
+                c.RoutePrefix = string.Empty;
             });
 
             app.MapControllers();

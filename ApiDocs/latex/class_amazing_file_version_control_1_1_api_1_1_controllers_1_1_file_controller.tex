@@ -1,0 +1,335 @@
+\doxysection{Класс Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller}
+\hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller}{}\label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+
+
+Класс контроллера для управления файлами.  
+
+
+Граф наследования\+:Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a2cdeee0d5661ca15910785cd82925b76}{File\+Controller}} (IFile\+Service file\+Service, ILogging\+Service logging\+Service, IUser\+Service user\+Service)
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller}{File\+Controller}. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ae7a5fbf28e52aa9a4434f5536c40a6dd}{Upload\+File}} (\mbox{[}From\+Form\mbox{]} File\+Upload\+DTO request)
+\begin{DoxyCompactList}\small\item\em Загрузить файл. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ac43c9506c1758551dff5cacfaf676216}{Download\+File\+With\+Metadata}} (\mbox{[}From\+Query\mbox{]} File\+Query\+With\+Version\+DTO request)
+\begin{DoxyCompactList}\small\item\em Скачать файл с метаданными. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a06af95b0544b320c80d803b1f0bc2357}{Get\+File\+Info\+By\+Version}} (\mbox{[}From\+Query\mbox{]} File\+Query\+With\+Version\+DTO request)
+\begin{DoxyCompactList}\small\item\em Получить информацию о файле по версии. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ae8c9343fc0e624230230ab8c2ca148a2}{Get\+File\+Info}} (\mbox{[}From\+Query\mbox{]} File\+Query\+DTO request)
+\begin{DoxyCompactList}\small\item\em Получить информацию о файле. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a3e024ed87c18fcf96538517e0f84ec99}{Get\+Project\+Files\+Info}} (\mbox{[}From\+Query\mbox{]} string project, \mbox{[}From\+Query\mbox{]} string? owner=null)
+\begin{DoxyCompactList}\small\item\em Получить информацию о всех файлах проекта. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a2808142882a0b0c23604f1639a46c558}{Get\+All\+Files\+Info}} (\mbox{[}From\+Query\mbox{]} string? owner=null)
+\begin{DoxyCompactList}\small\item\em Получить информацию о всех файлах пользователя. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a4907082a8b952472826ff80a5d40419d}{Update\+File\+Info\+By\+Version}} (\mbox{[}From\+Body\mbox{]} File\+Update\+With\+Version\+DTO request)
+\begin{DoxyCompactList}\small\item\em Обновить информацию о файле по версии. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a7bf2fa81b890524eea65c221019d403d}{Update\+File\+Info}} (\mbox{[}From\+Body\mbox{]} File\+Update\+DTO request)
+\begin{DoxyCompactList}\small\item\em Обновить информацию о файле. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a4942da4e03e6ce0cd5d92b389dcdc6b9}{Update\+File\+Info\+By\+Project}} (\mbox{[}From\+Body\mbox{]} Update\+All\+Files\+In\+Project\+DTO request)
+\begin{DoxyCompactList}\small\item\em Обновить информацию о всех файлах проекта. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a421cde0300dadd5534f32974dfdd5845}{Update\+All\+Files\+Info}} (\mbox{[}From\+Body\mbox{]} Update\+All\+Files\+DTO request)
+\begin{DoxyCompactList}\small\item\em Обновить информацию о всех файлах пользователя. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ae3d515f5c44a580d265e7ac48ec2ac82}{Delete\+File\+By\+Version}} (\mbox{[}From\+Query\mbox{]} File\+Query\+With\+Version\+DTO request)
+\begin{DoxyCompactList}\small\item\em Удалить файл по версии. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a5d810d4c8304847bee7d567cd564562e}{Delete\+File}} (\mbox{[}From\+Query\mbox{]} File\+Query\+DTO request)
+\begin{DoxyCompactList}\small\item\em Удалить файл. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a2f3f9ffd0ed2e86891a49c02905ebdf7}{Delete\+Project\+Files}} (\mbox{[}From\+Query\mbox{]} string project, \mbox{[}From\+Query\mbox{]} string? owner=null)
+\begin{DoxyCompactList}\small\item\em Удалить все файлы проекта. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a90497ee400874e5f1237d28780cd3055}{Delete\+All\+Files}} (\mbox{[}From\+Query\mbox{]} string? owner=null)
+\begin{DoxyCompactList}\small\item\em Удалить все файлы пользователя. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс контроллера для управления файлами. 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a2cdeee0d5661ca15910785cd82925b76}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!FileController@{FileController}}
+\index{FileController@{FileController}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{FileController()}{FileController()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a2cdeee0d5661ca15910785cd82925b76} 
+Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+File\+Controller (\begin{DoxyParamCaption}\item[{IFile\+Service}]{file\+Service}{, }\item[{ILogging\+Service}]{logging\+Service}{, }\item[{IUser\+Service}]{user\+Service}{}\end{DoxyParamCaption})}
+
+
+
+Конструктор класса \doxylink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller}{File\+Controller}. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em file\+Service} & Сервис управления файлами. \\
+\hline
+{\em logging\+Service} & Сервис логирования. \\
+\hline
+{\em user\+Service} & Сервис управления пользователями. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a90497ee400874e5f1237d28780cd3055}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!DeleteAllFiles@{DeleteAllFiles}}
+\index{DeleteAllFiles@{DeleteAllFiles}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{DeleteAllFiles()}{DeleteAllFiles()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a90497ee400874e5f1237d28780cd3055} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Delete\+All\+Files (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string?}]{owner}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Удалить все файлы пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em owner} & Владелец файлов. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a5d810d4c8304847bee7d567cd564562e}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!DeleteFile@{DeleteFile}}
+\index{DeleteFile@{DeleteFile}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{DeleteFile()}{DeleteFile()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a5d810d4c8304847bee7d567cd564562e} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Delete\+File (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} File\+Query\+DTO}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Удалить файл. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Данные для удаления файла. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ae3d515f5c44a580d265e7ac48ec2ac82}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!DeleteFileByVersion@{DeleteFileByVersion}}
+\index{DeleteFileByVersion@{DeleteFileByVersion}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{DeleteFileByVersion()}{DeleteFileByVersion()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ae3d515f5c44a580d265e7ac48ec2ac82} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Delete\+File\+By\+Version (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} File\+Query\+With\+Version\+DTO}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Удалить файл по версии. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Данные для удаления файла. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a2f3f9ffd0ed2e86891a49c02905ebdf7}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!DeleteProjectFiles@{DeleteProjectFiles}}
+\index{DeleteProjectFiles@{DeleteProjectFiles}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{DeleteProjectFiles()}{DeleteProjectFiles()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a2f3f9ffd0ed2e86891a49c02905ebdf7} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Delete\+Project\+Files (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string}]{project}{, }\item[{\mbox{[}\+From\+Query\mbox{]} string?}]{owner}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Удалить все файлы проекта. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em project} & Проект, к которому относятся файлы. \\
+\hline
+{\em owner} & Владелец файлов. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ac43c9506c1758551dff5cacfaf676216}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!DownloadFileWithMetadata@{DownloadFileWithMetadata}}
+\index{DownloadFileWithMetadata@{DownloadFileWithMetadata}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{DownloadFileWithMetadata()}{DownloadFileWithMetadata()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ac43c9506c1758551dff5cacfaf676216} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Download\+File\+With\+Metadata (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} File\+Query\+With\+Version\+DTO}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Скачать файл с метаданными. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Данные для скачивания файла. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a2808142882a0b0c23604f1639a46c558}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!GetAllFilesInfo@{GetAllFilesInfo}}
+\index{GetAllFilesInfo@{GetAllFilesInfo}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{GetAllFilesInfo()}{GetAllFilesInfo()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a2808142882a0b0c23604f1639a46c558} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Get\+All\+Files\+Info (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string?}]{owner}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Получить информацию о всех файлах пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em owner} & Владелец файлов. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ae8c9343fc0e624230230ab8c2ca148a2}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!GetFileInfo@{GetFileInfo}}
+\index{GetFileInfo@{GetFileInfo}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{GetFileInfo()}{GetFileInfo()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ae8c9343fc0e624230230ab8c2ca148a2} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Get\+File\+Info (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} File\+Query\+DTO}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Получить информацию о файле. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Данные для запроса информации о файле. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a06af95b0544b320c80d803b1f0bc2357}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!GetFileInfoByVersion@{GetFileInfoByVersion}}
+\index{GetFileInfoByVersion@{GetFileInfoByVersion}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{GetFileInfoByVersion()}{GetFileInfoByVersion()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a06af95b0544b320c80d803b1f0bc2357} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Get\+File\+Info\+By\+Version (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} File\+Query\+With\+Version\+DTO}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Получить информацию о файле по версии. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Данные для запроса информации о файле. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a3e024ed87c18fcf96538517e0f84ec99}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!GetProjectFilesInfo@{GetProjectFilesInfo}}
+\index{GetProjectFilesInfo@{GetProjectFilesInfo}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{GetProjectFilesInfo()}{GetProjectFilesInfo()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a3e024ed87c18fcf96538517e0f84ec99} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Get\+Project\+Files\+Info (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Query\mbox{]} string}]{project}{, }\item[{\mbox{[}\+From\+Query\mbox{]} string?}]{owner}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+Получить информацию о всех файлах проекта. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em project} & Проект, к которому относятся файлы. \\
+\hline
+{\em owner} & Владелец файлов. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a421cde0300dadd5534f32974dfdd5845}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!UpdateAllFilesInfo@{UpdateAllFilesInfo}}
+\index{UpdateAllFilesInfo@{UpdateAllFilesInfo}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{UpdateAllFilesInfo()}{UpdateAllFilesInfo()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a421cde0300dadd5534f32974dfdd5845} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Update\+All\+Files\+Info (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Body\mbox{]} Update\+All\+Files\+DTO}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Обновить информацию о всех файлах пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Данные для обновления информации о файлах. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a7bf2fa81b890524eea65c221019d403d}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!UpdateFileInfo@{UpdateFileInfo}}
+\index{UpdateFileInfo@{UpdateFileInfo}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{UpdateFileInfo()}{UpdateFileInfo()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a7bf2fa81b890524eea65c221019d403d} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Update\+File\+Info (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Body\mbox{]} File\+Update\+DTO}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Обновить информацию о файле. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Данные для обновления информации о файле. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a4942da4e03e6ce0cd5d92b389dcdc6b9}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!UpdateFileInfoByProject@{UpdateFileInfoByProject}}
+\index{UpdateFileInfoByProject@{UpdateFileInfoByProject}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{UpdateFileInfoByProject()}{UpdateFileInfoByProject()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a4942da4e03e6ce0cd5d92b389dcdc6b9} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Update\+File\+Info\+By\+Project (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Body\mbox{]} Update\+All\+Files\+In\+Project\+DTO}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Обновить информацию о всех файлах проекта. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Данные для обновления информации о файлах. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a4907082a8b952472826ff80a5d40419d}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!UpdateFileInfoByVersion@{UpdateFileInfoByVersion}}
+\index{UpdateFileInfoByVersion@{UpdateFileInfoByVersion}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{UpdateFileInfoByVersion()}{UpdateFileInfoByVersion()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_a4907082a8b952472826ff80a5d40419d} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Update\+File\+Info\+By\+Version (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Body\mbox{]} File\+Update\+With\+Version\+DTO}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Обновить информацию о файле по версии. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Данные для обновления информации о файле. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ae7a5fbf28e52aa9a4434f5536c40a6dd}\index{AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}!UploadFile@{UploadFile}}
+\index{UploadFile@{UploadFile}!AmazingFileVersionControl.Api.Controllers.FileController@{AmazingFileVersionControl.Api.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{UploadFile()}{UploadFile()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_file_controller_ae7a5fbf28e52aa9a4434f5536c40a6dd} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+File\+Controller.\+Upload\+File (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Form\mbox{]} File\+Upload\+DTO}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Загрузить файл. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Данные для загрузки файла. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Controllers/\mbox{\hyperlink{_file_controller_8cs}{File\+Controller.\+cs}}\end{DoxyCompactItemize}

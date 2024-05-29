@@ -1,0 +1,89 @@
+\doxysection{Класс Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Auth\+Controller}
+\hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller}{}\label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller}\index{AmazingFileVersionControl.Api.Controllers.AuthController@{AmazingFileVersionControl.Api.Controllers.AuthController}}
+
+
+Класс контроллера для аутентификации и регистрации пользователей.  
+
+
+Граф наследования\+:Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Auth\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller_aa4cf32d70ddddc10bc199e36464e4252}{Auth\+Controller}} (IAuth\+Service auth\+Service, ILogging\+Service logging\+Service)
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller}{Auth\+Controller}. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller_a885d6b58c5fd6f389e1a1815a30de566}{Register}} (\mbox{[}From\+Body\mbox{]} Register\+DTO register\+Dto)
+\begin{DoxyCompactList}\small\item\em Регистрация нового пользователя. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller_ab7b2bb2b486b67c6a1657d08c19e17c5}{Login}} (\mbox{[}From\+Body\mbox{]} Login\+DTO login\+Dto)
+\begin{DoxyCompactList}\small\item\em Вход пользователя в систему. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс контроллера для аутентификации и регистрации пользователей. 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller_aa4cf32d70ddddc10bc199e36464e4252}\index{AmazingFileVersionControl.Api.Controllers.AuthController@{AmazingFileVersionControl.Api.Controllers.AuthController}!AuthController@{AuthController}}
+\index{AuthController@{AuthController}!AmazingFileVersionControl.Api.Controllers.AuthController@{AmazingFileVersionControl.Api.Controllers.AuthController}}
+\doxysubsubsection{\texorpdfstring{AuthController()}{AuthController()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller_aa4cf32d70ddddc10bc199e36464e4252} 
+Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Auth\+Controller.\+Auth\+Controller (\begin{DoxyParamCaption}\item[{IAuth\+Service}]{auth\+Service}{, }\item[{ILogging\+Service}]{logging\+Service}{}\end{DoxyParamCaption})}
+
+
+
+Конструктор класса \doxylink{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller}{Auth\+Controller}. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em auth\+Service} & Сервис аутентификации. \\
+\hline
+{\em logging\+Service} & Сервис логирования. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller_ab7b2bb2b486b67c6a1657d08c19e17c5}\index{AmazingFileVersionControl.Api.Controllers.AuthController@{AmazingFileVersionControl.Api.Controllers.AuthController}!Login@{Login}}
+\index{Login@{Login}!AmazingFileVersionControl.Api.Controllers.AuthController@{AmazingFileVersionControl.Api.Controllers.AuthController}}
+\doxysubsubsection{\texorpdfstring{Login()}{Login()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller_ab7b2bb2b486b67c6a1657d08c19e17c5} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Auth\+Controller.\+Login (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Body\mbox{]} Login\+DTO}]{login\+Dto}{}\end{DoxyParamCaption})}
+
+
+
+Вход пользователя в систему. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em login\+Dto} & DTO с данными для входа. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+\Hypertarget{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller_a885d6b58c5fd6f389e1a1815a30de566}\index{AmazingFileVersionControl.Api.Controllers.AuthController@{AmazingFileVersionControl.Api.Controllers.AuthController}!Register@{Register}}
+\index{Register@{Register}!AmazingFileVersionControl.Api.Controllers.AuthController@{AmazingFileVersionControl.Api.Controllers.AuthController}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}}
+{\footnotesize\ttfamily \label{class_amazing_file_version_control_1_1_api_1_1_controllers_1_1_auth_controller_a885d6b58c5fd6f389e1a1815a30de566} 
+async Task$<$ IAction\+Result $>$ Amazing\+File\+Version\+Control.\+Api.\+Controllers.\+Auth\+Controller.\+Register (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Body\mbox{]} Register\+DTO}]{register\+Dto}{}\end{DoxyParamCaption})}
+
+
+
+Регистрация нового пользователя. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em register\+Dto} & DTO с данными для регистрации. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Результат выполнения действия. 
+\end{DoxyReturn}
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+Controllers/\mbox{\hyperlink{_auth_controller_8cs}{Auth\+Controller.\+cs}}\end{DoxyCompactItemize}
