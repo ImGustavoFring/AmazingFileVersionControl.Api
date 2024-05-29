@@ -7,10 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmazingFileVersionControl.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmazingFileVersionControl.Core", "..\AmazingFileVersionControl.Core\AmazingFileVersionControl.Core.csproj", "{E0802EAE-6715-4805-B63C-FF979F9E5856}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmazingFileVersionControl.ApiClients", "..\AmazingFileVersionControl.ApiClients\AmazingFileVersionControl.ApiClients.csproj", "{9D55EABA-7342-433A-9AEC-7E5A9312465E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmazingFileVersionControl.ConsoleClient", "..\AmazingFileVersionControl.ConsoleClient\AmazingFileVersionControl.ConsoleClient.csproj", "{620CDF29-CDFE-497C-9C0B-C3DFD4AF057B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +21,6 @@ Global
 		{E0802EAE-6715-4805-B63C-FF979F9E5856}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0802EAE-6715-4805-B63C-FF979F9E5856}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0802EAE-6715-4805-B63C-FF979F9E5856}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D55EABA-7342-433A-9AEC-7E5A9312465E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D55EABA-7342-433A-9AEC-7E5A9312465E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D55EABA-7342-433A-9AEC-7E5A9312465E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D55EABA-7342-433A-9AEC-7E5A9312465E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{620CDF29-CDFE-497C-9C0B-C3DFD4AF057B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{620CDF29-CDFE-497C-9C0B-C3DFD4AF057B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{620CDF29-CDFE-497C-9C0B-C3DFD4AF057B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{620CDF29-CDFE-497C-9C0B-C3DFD4AF057B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

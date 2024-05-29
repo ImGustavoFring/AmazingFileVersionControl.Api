@@ -17,11 +17,13 @@ namespace AmazingFileVersionControl.Api.Controllers
     {
         private readonly IFileService _fileService;
         private readonly ILoggingService _loggingService;
+        private readonly IUserService _userService;
 
-        public FileController(IFileService fileService, ILoggingService loggingService)
+        public FileController(IFileService fileService, ILoggingService loggingService, IUserService userService)
         {
             _fileService = fileService;
             _loggingService = loggingService;
+            _userService = userService;
         }
 
         private string GetUserLogin() => User.FindFirst(ClaimTypes.Name)?.Value;
@@ -38,12 +40,23 @@ namespace AmazingFileVersionControl.Api.Controllers
             return IsAdmin() || owner == GetUserLogin();
         }
 
+        private async Task<bool> UserExists(string userLogin)
+        {
+            var user = await _userService.GetByLogin(userLogin);
+            return user != null;
+        }
+
         [HttpPost("upload")]
         public async Task<IActionResult> UploadFile([FromForm] FileUploadDTO request)
         {
             try
             {
                 var owner = GetOwner(request.Owner);
+
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
 
                 if (!IsAuthorized(owner))
                 {
@@ -77,11 +90,16 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpGet("download")]
-        public async Task<IActionResult> DownloadFileWithMetadata([FromQuery] FileQueryDTO request)
+        public async Task<IActionResult> DownloadFileWithMetadata([FromQuery] FileQueryWithVersionDTO request)
         {
             try
             {
                 var owner = GetOwner(request.Owner);
+
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
 
                 if (!IsAuthorized(owner))
                 {
@@ -119,11 +137,16 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpGet("info/version")]
-        public async Task<IActionResult> GetFileInfoByVersion([FromQuery] FileQueryDTO request)
+        public async Task<IActionResult> GetFileInfoByVersion([FromQuery] FileQueryWithVersionDTO request)
         {
             try
             {
                 var owner = GetOwner(request.Owner);
+
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
 
                 if (!IsAuthorized(owner))
                 {
@@ -160,6 +183,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             {
                 var owner = GetOwner(request.Owner);
 
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
+
                 if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only view information about your own files.");
@@ -193,6 +221,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             try
             {
                 owner = GetOwner(owner);
+
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
+
                 if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only view information about your own project files.");
@@ -222,6 +256,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             try
             {
                 owner = GetOwner(owner);
+
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
+
                 if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only view your own files.");
@@ -246,11 +286,16 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpPut("update/version")]
-        public async Task<IActionResult> UpdateFileInfoByVersion([FromBody] FileUpdateDTO request)
+        public async Task<IActionResult> UpdateFileInfoByVersion([FromBody] FileUpdateWithVersionDTO request)
         {
             try
             {
                 var owner = GetOwner(request.Owner);
+
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
 
                 if (!IsAuthorized(owner))
                 {
@@ -289,6 +334,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             {
                 var owner = GetOwner(request.Owner);
 
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
+
                 if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only update your own files.");
@@ -319,11 +369,16 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpPut("update/project")]
-        public async Task<IActionResult> UpdateFileInfoByProject([FromBody] UpdateAllFilesDTO request)
+        public async Task<IActionResult> UpdateFileInfoByProject([FromBody] UpdateAllFilesInProjectDTO request)
         {
             try
             {
                 var owner = GetOwner(request.Owner);
+
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
 
                 if (!IsAuthorized(owner))
                 {
@@ -356,6 +411,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             {
                 var owner = GetOwner(request.Owner);
 
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
+
                 if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only update your own files.");
@@ -381,11 +441,16 @@ namespace AmazingFileVersionControl.Api.Controllers
         }
 
         [HttpDelete("delete/version")]
-        public async Task<IActionResult> DeleteFileByVersion([FromQuery] FileQueryDTO request)
+        public async Task<IActionResult> DeleteFileByVersion([FromQuery] FileQueryWithVersionDTO request)
         {
             try
             {
                 var owner = GetOwner(request.Owner);
+
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
 
                 if (!IsAuthorized(owner))
                 {
@@ -422,6 +487,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             {
                 var owner = GetOwner(request.Owner);
 
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
+
                 if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only delete your own files.");
@@ -455,6 +525,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             try
             {
                 owner = GetOwner(owner);
+
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
+
                 if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only delete your own project files.");
@@ -484,6 +560,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             try
             {
                 owner = GetOwner(owner);
+
+                if (!await UserExists(owner))
+                {
+                    return NotFound("User not found.");
+                }
+
                 if (!IsAuthorized(owner))
                 {
                     return Forbid("You can only delete your own files.");

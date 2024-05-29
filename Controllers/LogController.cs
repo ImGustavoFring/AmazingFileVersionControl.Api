@@ -1,10 +1,13 @@
 ﻿using AmazingFileVersionControl.Core.DTOs.LoggingDTOs;
 using AmazingFileVersionControl.Core.Services;
+using AmazingFileVersionControl.Core.Models.LoggingEntities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace AmazingFileVersionControl.Api.Controllers
 {
@@ -14,17 +17,34 @@ namespace AmazingFileVersionControl.Api.Controllers
     public class LogController : ControllerBase
     {
         private readonly ILoggingService _loggingService;
+        private readonly IUserService _userService;
 
-        public LogController(ILoggingService loggingService)
+        public LogController(ILoggingService loggingService, IUserService userService)
         {
             _loggingService = loggingService;
+            _userService = userService;
         }
+
+        private async Task<bool> UserExists(string userId)
+        {
+            var user = await _userService.GetById(userId);
+            return user != null;
+        }
+
+        private string GetUserId() => User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
         [HttpGet("get/{id}")]
         public async Task<IActionResult> GetLogById(string id)
         {
             try
             {
+                var currentUser = GetUserId();
+
+                if (!await UserExists(currentUser))
+                {
+                    return NotFound("User not found.");
+                }
+
                 var log = await _loggingService.GetLogByIdAsync(id);
                 if (log == null)
                 {
@@ -38,7 +58,12 @@ namespace AmazingFileVersionControl.Api.Controllers
                     "Log retrieved successfully",
                     additionalData: new BsonDocument { { "LogId", id } });
 
-                return Ok(log);
+                var logJson = JsonConvert.SerializeObject(log, new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+                return Ok(logJson);
             }
             catch (Exception ex)
             {
@@ -55,6 +80,13 @@ namespace AmazingFileVersionControl.Api.Controllers
         {
             try
             {
+                var currentUser = GetUserId();
+
+                if (!await UserExists(currentUser))
+                {
+                    return NotFound("User not found.");
+                }
+
                 BsonDocument additionalDataBson = null;
 
                 if (!string.IsNullOrEmpty(filter.AdditionalData))
@@ -73,7 +105,12 @@ namespace AmazingFileVersionControl.Api.Controllers
                 await _loggingService.LogAsync(nameof(LogController), nameof(GetLogs),
                     "Logs retrieved successfully");
 
-                return Ok(logs);
+                var logsJson = JsonConvert.SerializeObject(logs, new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+                return Ok(logsJson);
             }
             catch (Exception ex)
             {
@@ -90,6 +127,13 @@ namespace AmazingFileVersionControl.Api.Controllers
         {
             try
             {
+                var currentUser = GetUserId();
+
+                if (!await UserExists(currentUser))
+                {
+                    return NotFound("User not found.");
+                }
+
                 await _loggingService.DeleteLogByIdAsync(id);
 
                 await _loggingService.LogAsync(nameof(LogController), nameof(DeleteLogById),
@@ -113,6 +157,13 @@ namespace AmazingFileVersionControl.Api.Controllers
         {
             try
             {
+                var currentUser = GetUserId();
+
+                if (!await UserExists(currentUser))
+                {
+                    return NotFound("User not found.");
+                }
+
                 BsonDocument additionalDataBson = null;
 
                 if (!string.IsNullOrEmpty(filter.AdditionalData))

@@ -12,6 +12,7 @@ using MongoDB.Driver;
 using System;
 using System.Text;
 using System.Text.Json.Serialization;
+using Microsoft.OpenApi.Models;
 
 namespace AmazingFileVersionControl.Api
 {
@@ -28,7 +29,6 @@ namespace AmazingFileVersionControl.Api
 
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {
-
             });
 
             // Configure services
@@ -102,10 +102,40 @@ namespace AmazingFileVersionControl.Api
                     policy.RequireRole("USER", "ADMIN"));
 
                 options.AddPolicy("AdminPolicy", policy => policy.RequireRole("ADMIN"));
-
             });
 
             services.AddControllers();
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AmazingFileVersionControl API", Version = "v1" });
+
+                // Add JWT token support to Swagger
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
+            });
         }
 
         private static void Configure(WebApplication app)
@@ -118,6 +148,18 @@ namespace AmazingFileVersionControl.Api
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AmazingFileVersionControl API V1");
+                c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
+            });
+
             app.MapControllers();
         }
     }
