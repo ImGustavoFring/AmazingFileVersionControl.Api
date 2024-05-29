@@ -1,4 +1,9 @@
-﻿using AmazingFileVersionControl.Core.DTOs.LoggingDTOs;
+﻿/**
+ * @file LogController.cs
+ * @brief Контроллер для управления логами.
+ */
+
+using AmazingFileVersionControl.Core.DTOs.LoggingDTOs;
 using AmazingFileVersionControl.Core.Services;
 using AmazingFileVersionControl.Core.Models.LoggingEntities;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +16,10 @@ using Newtonsoft.Json;
 
 namespace AmazingFileVersionControl.Api.Controllers
 {
+    /**
+     * @class LogController
+     * @brief Класс контроллера для управления логами.
+     */
     [ApiController]
     [Route("api/[controller]")]
     [Authorize(Policy = "AdminPolicy")]
@@ -19,20 +28,39 @@ namespace AmazingFileVersionControl.Api.Controllers
         private readonly ILoggingService _loggingService;
         private readonly IUserService _userService;
 
+        /**
+         * @brief Конструктор класса LogController.
+         * @param loggingService Сервис логирования.
+         * @param userService Сервис управления пользователями.
+         */
         public LogController(ILoggingService loggingService, IUserService userService)
         {
             _loggingService = loggingService;
             _userService = userService;
         }
 
+        /**
+         * @brief Проверить, существует ли пользователь.
+         * @param userId Идентификатор пользователя.
+         * @return true, если пользователь существует, иначе false.
+         */
         private async Task<bool> UserExists(string userId)
         {
             var user = await _userService.GetById(userId);
             return user != null;
         }
 
+        /**
+         * @brief Получить идентификатор текущего пользователя.
+         * @return Идентификатор текущего пользователя.
+         */
         private string GetUserId() => User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
+        /**
+         * @brief Получить лог по идентификатору.
+         * @param id Идентификатор лога.
+         * @return Результат выполнения действия.
+         */
         [HttpGet("get/{id}")]
         public async Task<IActionResult> GetLogById(string id)
         {
@@ -75,6 +103,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Получить список логов по фильтрам.
+         * @param filter DTO с данными фильтрации логов.
+         * @return Результат выполнения действия.
+         */
         [HttpGet("list")]
         public async Task<IActionResult> GetLogs([FromQuery] LogFilterDTO filter)
         {
@@ -122,6 +155,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Удалить лог по идентификатору.
+         * @param id Идентификатор лога.
+         * @return Результат выполнения действия.
+         */
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteLogById(string id)
         {
@@ -152,6 +190,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Удалить список логов по фильтрам.
+         * @param filter DTO с данными фильтрации логов.
+         * @return Результат выполнения действия.
+         */
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteLogs([FromQuery] LogFilterDTO filter)
         {

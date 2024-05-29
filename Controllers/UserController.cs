@@ -1,4 +1,9 @@
-﻿using AmazingFileVersionControl.Core.Models.UserDbEntities;
+﻿/**
+ * @file UserController.cs
+ * @brief Контроллер для управления пользователями.
+ */
+
+using AmazingFileVersionControl.Core.Models.UserDbEntities;
 using AmazingFileVersionControl.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +14,10 @@ using System.Threading.Tasks;
 
 namespace AmazingFileVersionControl.Api.Controllers
 {
+    /**
+     * @class UserController
+     * @brief Класс контроллера для управления пользователями.
+     */
     [ApiController]
     [Route("api/[controller]")]
     [Authorize(Policy = "UserPolicy")]
@@ -17,22 +26,51 @@ namespace AmazingFileVersionControl.Api.Controllers
         private readonly IUserService _userService;
         private readonly ILoggingService _loggingService;
 
+        /**
+         * @brief Конструктор класса UserController.
+         * @param userService Сервис управления пользователями.
+         * @param loggingService Сервис логирования.
+         */
         public UserController(IUserService userService, ILoggingService loggingService)
         {
             _userService = userService;
             _loggingService = loggingService;
         }
 
+        /**
+         * @brief Получить логин текущего пользователя.
+         * @return Логин текущего пользователя.
+         */
         private string GetUserLogin() => User.FindFirst(ClaimTypes.Name)?.Value;
+
+        /**
+         * @brief Получить идентификатор текущего пользователя.
+         * @return Идентификатор текущего пользователя.
+         */
         private string GetUserId() => User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        /**
+         * @brief Проверить, является ли текущий пользователь администратором.
+         * @return true, если текущий пользователь администратор, иначе false.
+         */
         private bool IsAdmin() => User.IsInRole("ADMIN");
 
+        /**
+         * @brief Проверить, существует ли пользователь.
+         * @param userId Идентификатор пользователя.
+         * @return true, если пользователь существует, иначе false.
+         */
         private async Task<bool> UserExists(string userId)
         {
             var user = await _userService.GetById(userId);
             return user != null;
         }
 
+        /**
+         * @brief Получить информацию о пользователе.
+         * @param userId Идентификатор пользователя.
+         * @return Результат выполнения действия.
+         */
         [HttpGet("user")]
         public async Task<IActionResult> GetUser([FromQuery] string? userId)
         {
@@ -69,6 +107,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Получить список пользователей по подстроке логина.
+         * @param loginSubstring Подстрока логина.
+         * @return Результат выполнения действия.
+         */
         [HttpGet("search-by-login")]
         [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> GetUsersByLoginSubstring([FromQuery] string loginSubstring)
@@ -93,6 +136,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Получить список пользователей по подстроке электронной почты.
+         * @param emailSubstring Подстрока электронной почты.
+         * @return Результат выполнения действия.
+         */
         [HttpGet("search-by-email")]
         [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> GetUsersByEmailSubstring([FromQuery] string emailSubstring)
@@ -117,6 +165,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Изменить логин пользователя.
+         * @param userId Идентификатор пользователя.
+         * @param newLogin Новый логин пользователя.
+         * @return Результат выполнения действия.
+         */
         [HttpPut("change-login")]
         public async Task<IActionResult> ChangeLogin([FromQuery] string? userId, [FromBody] string newLogin)
         {
@@ -153,6 +207,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Изменить электронную почту пользователя.
+         * @param userId Идентификатор пользователя.
+         * @param newEmail Новая электронная почта пользователя.
+         * @return Результат выполнения действия.
+         */
         [HttpPut("change-email")]
         public async Task<IActionResult> ChangeEmail([FromQuery] string? userId, [FromBody] string newEmail)
         {
@@ -189,6 +249,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Изменить пароль пользователя.
+         * @param userId Идентификатор пользователя.
+         * @param newPassword Новый пароль пользователя.
+         * @return Результат выполнения действия.
+         */
         [HttpPut("change-password")]
         public async Task<IActionResult> ChangePassword([FromQuery] string? userId, [FromBody] string newPassword)
         {
@@ -225,6 +291,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Изменить роль пользователя.
+         * @param userId Идентификатор пользователя.
+         * @param newRole Новая роль пользователя.
+         * @return Результат выполнения действия.
+         */
         [HttpPut("change-role")]
         [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> ChangeRole([FromQuery] string? userId, RoleInSystem newRole)
@@ -256,6 +328,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Удалить пользователя.
+         * @param userId Идентификатор пользователя.
+         * @return Результат выполнения действия.
+         */
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteUser([FromQuery] string? userId)
         {

@@ -1,4 +1,9 @@
-﻿using AmazingFileVersionControl.Core.DTOs.FileDTOs;
+﻿/**
+ * @file FileController.cs
+ * @brief Контроллер для управления файлами.
+ */
+
+using AmazingFileVersionControl.Core.DTOs.FileDTOs;
 using AmazingFileVersionControl.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +15,10 @@ using System.Threading.Tasks;
 
 namespace AmazingFileVersionControl.Api.Controllers
 {
+    /**
+     * @class FileController
+     * @brief Класс контроллера для управления файлами.
+     */
     [ApiController]
     [Route("api/[controller]")]
     [Authorize(Policy = "UserPolicy")]
@@ -19,6 +28,12 @@ namespace AmazingFileVersionControl.Api.Controllers
         private readonly ILoggingService _loggingService;
         private readonly IUserService _userService;
 
+        /**
+         * @brief Конструктор класса FileController.
+         * @param fileService Сервис управления файлами.
+         * @param loggingService Сервис логирования.
+         * @param userService Сервис управления пользователями.
+         */
         public FileController(IFileService fileService, ILoggingService loggingService, IUserService userService)
         {
             _fileService = fileService;
@@ -26,26 +41,55 @@ namespace AmazingFileVersionControl.Api.Controllers
             _userService = userService;
         }
 
+        /**
+         * @brief Получить логин текущего пользователя.
+         * @return Логин текущего пользователя.
+         */
         private string GetUserLogin() => User.FindFirst(ClaimTypes.Name)?.Value;
+
+        /**
+         * @brief Проверить, является ли текущий пользователь администратором.
+         * @return true, если текущий пользователь администратор, иначе false.
+         */
         private bool IsAdmin() => User.IsInRole("ADMIN");
 
+        /**
+         * @brief Получить владельца файла.
+         * @param requestedOwner Запрашиваемый владелец.
+         * @return Владелец файла.
+         */
         private string GetOwner(string requestedOwner)
         {
             var userLogin = GetUserLogin();
             return string.IsNullOrEmpty(requestedOwner) ? userLogin : requestedOwner;
         }
 
+        /**
+         * @brief Проверить, имеет ли пользователь права на действия с файлами.
+         * @param owner Владелец файла.
+         * @return true, если пользователь имеет права, иначе false.
+         */
         private bool IsAuthorized(string owner)
         {
             return IsAdmin() || owner == GetUserLogin();
         }
 
+        /**
+         * @brief Проверить, существует ли пользователь.
+         * @param userLogin Логин пользователя.
+         * @return true, если пользователь существует, иначе false.
+         */
         private async Task<bool> UserExists(string userLogin)
         {
             var user = await _userService.GetByLogin(userLogin);
             return user != null;
         }
 
+        /**
+         * @brief Загрузить файл.
+         * @param request Данные для загрузки файла.
+         * @return Результат выполнения действия.
+         */
         [HttpPost("upload")]
         public async Task<IActionResult> UploadFile([FromForm] FileUploadDTO request)
         {
@@ -89,6 +133,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Скачать файл с метаданными.
+         * @param request Данные для скачивания файла.
+         * @return Результат выполнения действия.
+         */
         [HttpGet("download")]
         public async Task<IActionResult> DownloadFileWithMetadata([FromQuery] FileQueryWithVersionDTO request)
         {
@@ -136,6 +185,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Получить информацию о файле по версии.
+         * @param request Данные для запроса информации о файле.
+         * @return Результат выполнения действия.
+         */
         [HttpGet("info/version")]
         public async Task<IActionResult> GetFileInfoByVersion([FromQuery] FileQueryWithVersionDTO request)
         {
@@ -176,6 +230,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Получить информацию о файле.
+         * @param request Данные для запроса информации о файле.
+         * @return Результат выполнения действия.
+         */
         [HttpGet("info")]
         public async Task<IActionResult> GetFileInfo([FromQuery] FileQueryDTO request)
         {
@@ -215,6 +274,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Получить информацию о всех файлах проекта.
+         * @param project Проект, к которому относятся файлы.
+         * @param owner Владелец файлов.
+         * @return Результат выполнения действия.
+         */
         [HttpGet("project/info")]
         public async Task<IActionResult> GetProjectFilesInfo([FromQuery] string project, [FromQuery] string? owner = null)
         {
@@ -250,6 +315,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Получить информацию о всех файлах пользователя.
+         * @param owner Владелец файлов.
+         * @return Результат выполнения действия.
+         */
         [HttpGet("all/info")]
         public async Task<IActionResult> GetAllFilesInfo([FromQuery] string? owner = null)
         {
@@ -285,6 +355,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Обновить информацию о файле по версии.
+         * @param request Данные для обновления информации о файле.
+         * @return Результат выполнения действия.
+         */
         [HttpPut("update/version")]
         public async Task<IActionResult> UpdateFileInfoByVersion([FromBody] FileUpdateWithVersionDTO request)
         {
@@ -327,6 +402,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Обновить информацию о файле.
+         * @param request Данные для обновления информации о файле.
+         * @return Результат выполнения действия.
+         */
         [HttpPut("update")]
         public async Task<IActionResult> UpdateFileInfo([FromBody] FileUpdateDTO request)
         {
@@ -368,6 +448,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Обновить информацию о всех файлах проекта.
+         * @param request Данные для обновления информации о файлах.
+         * @return Результат выполнения действия.
+         */
         [HttpPut("update/project")]
         public async Task<IActionResult> UpdateFileInfoByProject([FromBody] UpdateAllFilesInProjectDTO request)
         {
@@ -404,6 +489,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Обновить информацию о всех файлах пользователя.
+         * @param request Данные для обновления информации о файлах.
+         * @return Результат выполнения действия.
+         */
         [HttpPut("update/all")]
         public async Task<IActionResult> UpdateAllFilesInfo([FromBody] UpdateAllFilesDTO request)
         {
@@ -440,6 +530,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Удалить файл по версии.
+         * @param request Данные для удаления файла.
+         * @return Результат выполнения действия.
+         */
         [HttpDelete("delete/version")]
         public async Task<IActionResult> DeleteFileByVersion([FromQuery] FileQueryWithVersionDTO request)
         {
@@ -480,6 +575,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Удалить файл.
+         * @param request Данные для удаления файла.
+         * @return Результат выполнения действия.
+         */
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteFile([FromQuery] FileQueryDTO request)
         {
@@ -519,6 +619,12 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Удалить все файлы проекта.
+         * @param project Проект, к которому относятся файлы.
+         * @param owner Владелец файлов.
+         * @return Результат выполнения действия.
+         */
         [HttpDelete("delete/project")]
         public async Task<IActionResult> DeleteProjectFiles([FromQuery] string project, [FromQuery] string? owner = null)
         {
@@ -554,6 +660,11 @@ namespace AmazingFileVersionControl.Api.Controllers
             }
         }
 
+        /**
+         * @brief Удалить все файлы пользователя.
+         * @param owner Владелец файлов.
+         * @return Результат выполнения действия.
+         */
         [HttpDelete("delete/all")]
         public async Task<IActionResult> DeleteAllFiles([FromQuery] string? owner = null)
         {
